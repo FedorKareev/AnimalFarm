@@ -21,6 +21,8 @@ public class Market : MonoBehaviour
             Sall();
         }
     }
+    
+    //Эта строчка была создана для проверки работы merge в git
    private void Sall()
     {
         foreach (ItemData item in _itemDatas)
