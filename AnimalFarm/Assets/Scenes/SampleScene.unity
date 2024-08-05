@@ -1325,9 +1325,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   inventoryData: {fileID: 11400000, guid: 7603685f03a6910409ad7690fcd6f1e6, type: 2}
   amountCount: {fileID: 336393540}
+  discriptionPlane: {fileID: 6159343}
   _costCount: {fileID: 2005288250}
   _moneyScript: {fileID: 1149934554}
-  discriptionPlane: {fileID: 6159343}
   _randomSpawn: {fileID: 1451398659}
   goods: 1
 --- !u!114 &259078459
@@ -8005,9 +8005,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   inventoryData: {fileID: 11400000, guid: 89bfb0ecaa39ad54b8adeee72a933e44, type: 2}
   amountCount: {fileID: 1825609681}
+  discriptionPlane: {fileID: 6159343}
   _costCount: {fileID: 1584831016}
   _moneyScript: {fileID: 1149934554}
-  discriptionPlane: {fileID: 6159343}
   _randomSpawn: {fileID: 1451398659}
   goods: 2
 --- !u!114 &1559024733
@@ -22831,9 +22831,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   inventoryData: {fileID: 11400000, guid: 0776a709b36b92547bc4b743f38bc319, type: 2}
   amountCount: {fileID: 8065404459205814990}
+  discriptionPlane: {fileID: 6159343}
   _costCount: {fileID: 2091150195}
   _moneyScript: {fileID: 1149934554}
-  discriptionPlane: {fileID: 6159343}
   _randomSpawn: {fileID: 1451398659}
   goods: 0
 --- !u!33 &8977721659251308978
@@ -23287,7 +23287,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c77debd40ddf81a498e9838d0ae5084d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  inventoryDataTest: {fileID: 11400000, guid: 89bfb0ecaa39ad54b8adeee72a933e44, type: 2}
-  spawnObjectScript: {fileID: 1989277173}
+  inventoryData: {fileID: 11400000, guid: 89bfb0ecaa39ad54b8adeee72a933e44, type: 2}
   amountCount: {fileID: 5467535681187697713}
+  discriptionPlane: {fileID: 0}
+  spawnObjectScript: {fileID: 1989277173}
   plantIndex: 0

@@ -1,21 +1,16 @@
 using System.Collections;
 using System.Collections.Generic;
-using System.ComponentModel;
-using Unity.VisualScripting;
-using UnityEngine;
-using UnityEngine.Rendering;
 using UnityEngine.UI;
+using UnityEngine;
 
-public class InventoryButton : MonoBehaviour
+public class ButtonsBase : MonoBehaviour
 {
     [SerializeField]
-    protected ItemData inventoryData;
+    private ItemData inventoryData;
     [SerializeField]
-    protected Text amountCount;
+    private Discription discriptionPlane;
     [SerializeField]
-    protected Discription discriptionPlane;
-
-
+    private Text amountCount;
     private void Update()
     {
         UpdateAmount();
