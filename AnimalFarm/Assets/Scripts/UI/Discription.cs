@@ -10,10 +10,6 @@ public class Discription : MonoBehaviour
     private Text _discriptionText;
     [SerializeField]
     private Image _discriptionIcon;
-    [SerializeField]
-    private void Start()
-    {
-    }
 
     public void ShowDicription(Sprite discriptionIcon, string discriptionText)
     {
