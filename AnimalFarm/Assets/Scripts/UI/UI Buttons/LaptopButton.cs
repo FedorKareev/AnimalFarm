@@ -3,34 +3,21 @@ using System.Collections.Generic;
 using UnityEngine.UI;
 using UnityEngine;
 
-public class LaptopButton : MonoBehaviour
+public class LaptopButton : InventoryButton
 {
-    [SerializeField]
-    private ItemData inventoryData;
-    [SerializeField]
-    private Text amountCount;
     [SerializeField]
     private Text _costCount;
     [SerializeField]
     private Money _moneyScript;
     [SerializeField]
-    private Discription discriptionPlane;
-    [SerializeField]
     private RandomSpawn _randomSpawn;
     [SerializeField]
     private Goods goods;
-    private void Update()
+
+    public override void UpdateAmount()
     {
-        UpdateAmount();
-    }
-    public void UpdateAmount()
-    {
-        amountCount.text = inventoryData.Amount.ToString();
         _costCount.text = inventoryData.PriceForBuy.ToString();
-    }
-    public void ShowDicription()
-    {
-        discriptionPlane.ShowDicription(inventoryData.Icon, inventoryData.Discription);
+        base.UpdateAmount();
     }
 
     public void BuyItem()

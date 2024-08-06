@@ -9,23 +9,22 @@ using UnityEngine.UI;
 public class InventoryButton : MonoBehaviour
 {
     [SerializeField]
-    private ItemData inventoryData;
+    protected ItemData inventoryData;
     [SerializeField]
-    private Text amountCount;
+    protected Text amountCount;
     [SerializeField]
-    private Discription discriptionPlane;
-    private int count;
+    protected Discription discriptionPlane;
 
 
     private void Update()
     {
         UpdateAmount();
     }
-    public void UpdateAmount()
+    public virtual void UpdateAmount()
     {
         amountCount.text = inventoryData.Amount.ToString();
     }
-    public void ShowDicription()
+    public virtual void ShowDicription()
     {
         discriptionPlane.ShowDicription(inventoryData.Icon, inventoryData.Discription);
     }

@@ -1355,9 +1355,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c77debd40ddf81a498e9838d0ae5084d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  inventoryDataTest: {fileID: 11400000, guid: 0776a709b36b92547bc4b743f38bc319, type: 2}
-  spawnObjectScript: {fileID: 8247746671483893533}
+  inventoryData: {fileID: 11400000, guid: 0776a709b36b92547bc4b743f38bc319, type: 2}
   amountCount: {fileID: 8771737114365337914}
+  discriptionPlane: {fileID: 0}
+  spawnObjectScript: {fileID: 8247746671483893533}
   plantIndex: 1
 --- !u!114 &8771737114365337914 stripped
 MonoBehaviour:
@@ -1589,9 +1590,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c77debd40ddf81a498e9838d0ae5084d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  inventoryDataTest: {fileID: 11400000, guid: 7603685f03a6910409ad7690fcd6f1e6, type: 2}
-  spawnObjectScript: {fileID: 8247746671483893533}
+  inventoryData: {fileID: 11400000, guid: 7603685f03a6910409ad7690fcd6f1e6, type: 2}
   amountCount: {fileID: 6772087917077704726}
+  discriptionPlane: {fileID: 0}
+  spawnObjectScript: {fileID: 8247746671483893533}
   plantIndex: 2
 --- !u!1001 &4236362329698086492
 PrefabInstance:
