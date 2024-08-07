@@ -1,3 +1,5 @@
+using System;
+using System.Collections;
 using UnityEngine;
 
 public class GardenbedScript : SpawnObjectsBase
@@ -8,11 +10,13 @@ public class GardenbedScript : SpawnObjectsBase
     private Transform[] spawnPoints;
     [SerializeField, Min(1f)]
     private float _timeMultiplier;
+    [SerializeField]
+    private GameObject vegetableSelectionMenu;
 
     private GameObject _plantedObject;
     private Plant rightPlant;
 
-    public GameObject vegetableSelectionMenu;
+    public static event Action onSpawn;
 
     private void OnMouseDown()
     {
@@ -21,6 +25,7 @@ public class GardenbedScript : SpawnObjectsBase
     private void Start()
     {
         DigVegetable();
+        onSpawn?.Invoke();
     }
     public override void SelectObject(int Index)
     {
@@ -60,6 +65,11 @@ public class GardenbedScript : SpawnObjectsBase
     }
     public void CollectPlants()
     {
+        StartCoroutine(CollectPlantsEnumerator());
+    }
+    private IEnumerator CollectPlantsEnumerator()
+    {
+        yield return new WaitForSeconds(3);
         if (!_plantedObject.GetComponent<Plant>()._isMaturing && _plantedObject != null)
         {
             _plantedObject.GetComponent<Plant>().ItemData.Amount += 1;
@@ -67,7 +77,7 @@ public class GardenbedScript : SpawnObjectsBase
         }
         else
         {
-            Debug.Log("Нихуя не созрело уебан");
+            Debug.Log("Не созрело");
         }
     }
 }

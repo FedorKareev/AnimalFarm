@@ -9,33 +9,61 @@ public class AnimalBase : MonoBehaviour
 {
     [SerializeField]
     private Transform target;
-
     [SerializeField]
     private Transform market;
+
     private NavMeshAgent agent;
+    private float timer = 0f;
+    private float delayTime = 5f;
+    private bool isMove = false;
+
+    public Transform Target
+    {
+        get
+        {
+            return target;
+        }
+        set
+        {
+            target = value;
+        }
+    }
+    private void Update()
+    {
+        if (isMove)
+        {
+            AnimalMove();
+        }
+    }
 
     private void Start()
     {
         agent = GetComponent<NavMeshAgent>();
-        agent.SetDestination(target.position);
     }
 
-    private void Update()
+    private void OnEnable()
     {
-        AnimalMove();
+        Duck—oop.onMove += IsMoveSwitcher;
+    }
+    private void OnDisable()
+    {
+        Duck—oop.onMove -= IsMoveSwitcher;
     }
 
     private void AnimalMove()
     {
-        StartCoroutine(TakeCrops());
-    }
-    private IEnumerator TakeCrops()
-    {
-        float distanceToWayPoint = Vector3.Distance(target.position, transform.position);
-        if (distanceToWayPoint <= 1)
+        agent.SetDestination(target.position);
+        if (agent.remainingDistance <= agent.stoppingDistance)
         {
-            yield return new WaitForSeconds(1);
-            agent.SetDestination(market.position);
-        }
+            timer += Time.deltaTime;
+            if (timer >= delayTime)
+            {
+                target = market.transform;
+            }
+        }   
+    }
+    private void IsMoveSwitcher()
+    {
+        isMove = true;
     }
 }
