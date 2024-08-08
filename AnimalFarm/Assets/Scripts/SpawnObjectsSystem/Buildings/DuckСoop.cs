@@ -24,7 +24,6 @@ public class DuckСoop : MonoBehaviour
     private void AddTargets()
     {
         _gardenBeds = GameObject.FindObjectsOfType<GardenbedScript>();
-        _ducks[0].Target = gameObject.transform;
     }
     private void OnMouseDown()
     {
@@ -37,5 +36,6 @@ public class DuckСoop : MonoBehaviour
             }
             onMove?.Invoke();
         }
+        Debug.Log("Кнопка нажата");
     }
 }

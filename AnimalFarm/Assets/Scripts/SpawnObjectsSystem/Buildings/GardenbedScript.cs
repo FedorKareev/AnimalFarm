@@ -4,6 +4,8 @@ using UnityEngine;
 
 public class GardenbedScript : SpawnObjectsBase
 {
+    public const int TIMEFOR_COLLECT = 3;
+
     [SerializeField]
     protected GameObject[] objectsToSpawn;
     [SerializeField]
@@ -69,7 +71,7 @@ public class GardenbedScript : SpawnObjectsBase
     }
     private IEnumerator CollectPlantsEnumerator()
     {
-        yield return new WaitForSeconds(3);
+        yield return new WaitForSeconds(TIMEFOR_COLLECT);
         if (!_plantedObject.GetComponent<Plant>()._isMaturing && _plantedObject != null)
         {
             _plantedObject.GetComponent<Plant>().ItemData.Amount += 1;

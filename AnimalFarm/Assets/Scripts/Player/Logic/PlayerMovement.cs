@@ -42,6 +42,14 @@ public class PlayerMovement : MonoBehaviour
         transform.forward = Vector3.Slerp(transform.forward, moveDirection, rotationDistace);
         isWalking = moveDirection != Vector3.zero;
     }
+    private void OnTriggerEnter(Collider collider)
+    {
+        GardenbedScript gardenBed = collider.gameObject.GetComponent<GardenbedScript>();
+        if (gardenBed != null)
+        {
+            Debug.Log("Привет");
+        }
+    }
 
     public bool IsWalking()
     {
