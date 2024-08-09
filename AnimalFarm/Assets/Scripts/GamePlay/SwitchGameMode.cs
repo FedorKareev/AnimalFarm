@@ -32,14 +32,14 @@ public class SwitchGameMode : MonoBehaviour
     {
         buildingPanel.SetActive(true);
         virtualCam1.SetActive(false);
-        playerMovementScript.IsMoveble = false;
+        PlayerMovement.IsMoveble = false;
         IsBuildingOn = true;
     }
     private void OffBuildingMode()
     {
         buildingPanel.SetActive(false);
         virtualCam1.SetActive(true);
-        playerMovementScript.IsMoveble = true;
+        PlayerMovement.IsMoveble = true;
         IsBuildingOn = false;
     }
 }

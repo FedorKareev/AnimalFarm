@@ -11,7 +11,7 @@ public class PlayerMovement : MonoBehaviour
     private float playerRotationSpeed;
     [SerializeField]
     private GameInput playerInput;
-    public bool IsMoveble;
+    public static bool IsMoveble;
 
     private bool isWalking;
 

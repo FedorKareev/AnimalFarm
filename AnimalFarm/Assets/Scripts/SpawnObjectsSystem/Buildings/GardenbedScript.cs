@@ -72,14 +72,14 @@ public class GardenbedScript : SpawnObjectsBase
     private IEnumerator CollectPlantsEnumerator()
     {
         yield return new WaitForSeconds(TIMEFOR_COLLECT);
-        if (!_plantedObject.GetComponent<Plant>()._isMaturing && _plantedObject != null)
+        if (_plantedObject != null && !_plantedObject.GetComponent<Plant>()._isMaturing)
         {
             _plantedObject.GetComponent<Plant>().ItemData.Amount += 1;
             DigVegetable();
         }
         else
         {
-            Debug.Log("Не созрело");
+            Debug.Log("Ничего не посаженно");
         }
     }
 }

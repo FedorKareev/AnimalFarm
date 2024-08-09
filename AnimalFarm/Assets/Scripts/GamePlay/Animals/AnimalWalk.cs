@@ -10,6 +10,10 @@ public class AnimalWalk : MonoBehaviour, IUnit
 {
     [SerializeField]
     private NavMeshAgent agent;
+    private void Update()
+    {
+
+    }
 
     public void MoveTo(Vector3 position, System.Action arrivedAtPosition)
     {
@@ -18,11 +22,7 @@ public class AnimalWalk : MonoBehaviour, IUnit
     }
     public void WaitForSeconds(float delayTime, Action onTimerComplete)
     {
-        float timer = 0;
-        timer += Time.deltaTime;
-        if (timer >= delayTime) 
-        {
-            onTimerComplete?.Invoke();
-        }
+       
     }
+    
 }
