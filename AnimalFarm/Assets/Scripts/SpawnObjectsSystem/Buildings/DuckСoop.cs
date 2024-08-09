@@ -11,8 +11,6 @@ public class DuckСoop : MonoBehaviour
     [SerializeField]
     private GardenbedScript[] _gardenBeds;
 
-    public static event Action onMove;
-
     private void OnEnable()
     {
         GardenbedScript.onSpawn += AddTargets;
@@ -27,15 +25,19 @@ public class DuckСoop : MonoBehaviour
     }
     private void OnMouseDown()
     {
+        MoveAnimals();
+        Debug.Log("Кнопка нажата");
+    }
+    private void MoveAnimals()
+    {
         if (_gardenBeds.Length != 0)
         {
-
             for (int i = 0; i < _ducks.Count; i++)
             {
                 _ducks[i].Target = _gardenBeds[UnityEngine.Random.Range(0, _gardenBeds.Length)].transform;
+                _ducks[i].StartPosition = gameObject.transform;
+                _ducks[i].IsMoveSwitcher();
             }
-            onMove?.Invoke();
         }
-        Debug.Log("Кнопка нажата");
     }
 }
