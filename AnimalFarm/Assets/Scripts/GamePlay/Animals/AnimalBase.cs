@@ -28,7 +28,6 @@ public class AnimalBase : MonoBehaviour
     private Action _onTargetPos;
     [SerializeField]
     private State state;
-    private bool isMove = false;
 
     public Transform StartPosition
     {

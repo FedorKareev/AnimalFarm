@@ -15,19 +15,34 @@ public class GardenbedScript : SpawnObjectsBase
     [SerializeField]
     private GameObject vegetableSelectionMenu;
 
+    private bool isAbleToOpen;
     private GameObject _plantedObject;
     private Plant rightPlant;
 
     public static event Action onSpawn;
-
-    private void OnMouseDown()
+    public bool IsAbleToOpen
     {
-        vegetableSelectionMenu.SetActive(true);
+        get
+        {
+            return isAbleToOpen;
+        }
+        set
+        {
+            isAbleToOpen = value;
+        }
     }
+
     private void Start()
     {
         DigVegetable();
         onSpawn?.Invoke();
+    }
+    private void OnMouseDown()
+    {
+        if (isAbleToOpen)
+        {
+            vegetableSelectionMenu.SetActive(true);
+        }
     }
     public override void SelectObject(int Index)
     {

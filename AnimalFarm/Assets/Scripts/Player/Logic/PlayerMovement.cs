@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using UnityEditor.UIElements;
 using UnityEngine;
 
 public class PlayerMovement : MonoBehaviour
@@ -11,6 +12,8 @@ public class PlayerMovement : MonoBehaviour
     private float playerRotationSpeed;
     [SerializeField]
     private GameInput playerInput;
+    [SerializeField]
+    private LayerMask layers;
     public static bool IsMoveble;
 
     private bool isWalking;
@@ -35,19 +38,18 @@ public class PlayerMovement : MonoBehaviour
     {
         float moveDistanse = playerMoveSpeed * Time.deltaTime;
         float rotationDistace = playerRotationSpeed * Time.deltaTime;
-
-        Vector3 moveDirection = playerInput.GetMoveMentVectorNormalized();
-        transform.position += moveDirection * moveDistanse;
-
-        transform.forward = Vector3.Slerp(transform.forward, moveDirection, rotationDistace);
-        isWalking = moveDirection != Vector3.zero;
-    }
-    private void OnTriggerEnter(Collider collider)
-    {
-        GardenbedScript gardenBed = collider.gameObject.GetComponent<GardenbedScript>();
-        if (gardenBed != null)
+        float playerRadius = 0.3f;
+        float playerHeight = 2;
+        if (!Physics.CapsuleCast(transform.position, transform.position + Vector3.up * playerHeight, playerRadius, playerInput.GetMoveMentVectorNormalized(), 1, layers))
         {
-            Debug.Log("Привет");
+            Vector3 moveDirection = playerInput.GetMoveMentVectorNormalized();
+            transform.position += moveDirection * moveDistanse;
+            transform.forward = Vector3.Slerp(transform.forward, moveDirection, rotationDistace);
+            isWalking = moveDirection != Vector3.zero;
+        }
+        else
+        {
+            isWalking = false;
         }
     }
 
