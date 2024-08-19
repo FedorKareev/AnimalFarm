@@ -38,7 +38,7 @@ public class PlayerMovement : MonoBehaviour
     {
         float moveDistanse = playerMoveSpeed * Time.deltaTime;
         float rotationDistace = playerRotationSpeed * Time.deltaTime;
-        float playerRadius = 0.3f;
+        float playerRadius = .3f;
         float playerHeight = 2;
         if (!Physics.CapsuleCast(transform.position, transform.position + Vector3.up * playerHeight, playerRadius, playerInput.GetMoveMentVectorNormalized(), 1, layers))
         {
