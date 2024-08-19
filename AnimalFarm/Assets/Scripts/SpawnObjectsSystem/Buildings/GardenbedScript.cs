@@ -1,26 +1,48 @@
+using System;
+using System.Collections;
 using UnityEngine;
 
 public class GardenbedScript : SpawnObjectsBase
 {
+    public const int TIMEFOR_COLLECT = 5;
+
     [SerializeField]
     protected GameObject[] objectsToSpawn;
     [SerializeField]
     private Transform[] spawnPoints;
     [SerializeField, Min(1f)]
     private float _timeMultiplier;
+    [SerializeField]
+    private GameObject vegetableSelectionMenu;
 
+    private bool isAbleToOpen;
     private GameObject _plantedObject;
     private Plant rightPlant;
 
-    public GameObject vegetableSelectionMenu;
-
-    private void OnMouseDown()
+    public static event Action onSpawn;
+    public bool IsAbleToOpen
     {
-        vegetableSelectionMenu.SetActive(true);
+        get
+        {
+            return isAbleToOpen;
+        }
+        set
+        {
+            isAbleToOpen = value;
+        }
     }
+
     private void Start()
     {
         DigVegetable();
+        onSpawn?.Invoke();
+    }
+    private void OnMouseDown()
+    {
+        if (isAbleToOpen)
+        {
+            vegetableSelectionMenu.SetActive(true);
+        }
     }
     public override void SelectObject(int Index)
     {
@@ -60,14 +82,19 @@ public class GardenbedScript : SpawnObjectsBase
     }
     public void CollectPlants()
     {
-        if (!_plantedObject.GetComponent<Plant>()._isMaturing && _plantedObject != null)
+        StartCoroutine(CollectPlantsEnumerator());
+    }
+    private IEnumerator CollectPlantsEnumerator()
+    {
+        yield return new WaitForSeconds(TIMEFOR_COLLECT);
+        if (_plantedObject != null && !_plantedObject.GetComponent<Plant>()._isMaturing)
         {
             _plantedObject.GetComponent<Plant>().ItemData.Amount += 1;
             DigVegetable();
         }
         else
         {
-            Debug.Log("Нихуя не созрело уебан");
+            Debug.Log("Ничего не посаженно");
         }
     }
 }

@@ -73,7 +73,6 @@ public class BuildingSystem : SpawnObjectsBase
         pendingObject.transform.Rotate(0, rotateDigrees, 0);
     }
 
-
     public override void SelectObject(int index)
     {
         pendingObject = Instantiate(buildings[index], pos, transform.rotation);

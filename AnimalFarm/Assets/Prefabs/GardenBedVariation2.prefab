@@ -855,7 +855,7 @@ GameObject:
   - component: {fileID: 1797941261922360581}
   - component: {fileID: 5174966627991439129}
   - component: {fileID: 8247746671483893533}
-  - component: {fileID: 3960301670960856105}
+  - component: {fileID: 4108772172874433245}
   m_Layer: 7
   m_Name: GardenBedVariation2
   m_TagString: Object
@@ -905,12 +905,12 @@ BoxCollider:
     serializedVersion: 2
     m_Bits: 0
   m_LayerOverridePriority: 0
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Size: {x: 6.36, y: 2.17, z: 11.78}
-  m_Center: {x: 0, y: 0, z: -0.15}
+  m_Size: {x: 4.52, y: 1.96, z: 11.09745}
+  m_Center: {x: 0, y: 0, z: -0.20272923}
 --- !u!54 &1797941261922360581
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -978,9 +978,9 @@ MonoBehaviour:
   - {fileID: 1798903082224655406}
   - {fileID: 5642034831851547637}
   - {fileID: 2417515742205244506}
-  _timeMultiplier: 1
+  _timeMultiplier: 50
   vegetableSelectionMenu: {fileID: 6994295830734651739}
---- !u!208 &3960301670960856105
+--- !u!208 &4108772172874433245
 NavMeshObstacle:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -990,7 +990,7 @@ NavMeshObstacle:
   m_Enabled: 1
   serializedVersion: 3
   m_Shape: 1
-  m_Extents: {x: 2.575, y: 0.325, z: 5.285}
+  m_Extents: {x: 2.385, y: 0.5, z: 5.305}
   m_MoveThreshold: 0.1
   m_Carve: 1
   m_CarveOnlyStationary: 1
