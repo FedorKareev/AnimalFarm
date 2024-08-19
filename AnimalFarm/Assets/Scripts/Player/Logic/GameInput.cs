@@ -1,17 +1,24 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
 public class GameInput : MonoBehaviour
 {
-    public Vector3 GetMoveMentVectorNormalized()
+    private PlayerInputActions playerInputActions;
+
+    private void Awake()
     {
-        var moveHorizontal = Input.GetAxisRaw("Horizontal");
-        var moveVertical = Input.GetAxisRaw("Vertical");
-        Vector3 inputDirection = new Vector3(moveHorizontal, 0, moveVertical);
+        playerInputActions = new PlayerInputActions();
+        playerInputActions.Player.Enable();
+    }
 
-        inputDirection = inputDirection.normalized;
+    public Vector2 GetMovementVectorNormalized()
+    {
+        Vector2 inputVector = playerInputActions.Player.Move.ReadValue<Vector2>();
 
-        return inputDirection;
+        inputVector = inputVector.normalized;
+
+        return inputVector;
     }
 }
