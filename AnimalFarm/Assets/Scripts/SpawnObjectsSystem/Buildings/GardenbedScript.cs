@@ -39,10 +39,7 @@ public class GardenbedScript : SpawnObjectsBase
     }
     private void OnMouseDown()
     {
-        if (isAbleToOpen)
-        {
-            vegetableSelectionMenu.SetActive(true);
-        }
+        vegetableSelectionMenu.SetActive(true);
     }
     public override void SelectObject(int Index)
     {
