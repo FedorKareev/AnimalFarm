@@ -1,7 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
-using Unity.Mathematics;
+using UnityEngine.UI;
 using UnityEngine;
 
 public class DuckСoop : MonoBehaviour
@@ -10,6 +10,8 @@ public class DuckСoop : MonoBehaviour
     private List<AnimalBase> _ducks = new List<AnimalBase>();
     [SerializeField]
     private GardenbedScript[] _gardenBeds;
+    [SerializeField]
+    private GameObject _gooseCoopPanel;
 
     private void OnEnable()
     {
@@ -25,10 +27,9 @@ public class DuckСoop : MonoBehaviour
     }
     private void OnMouseDown()
     {
-        MoveAnimals();
-        Debug.Log("Кнопка нажата");
+        _gooseCoopPanel.SetActive(true);
     }
-    private void MoveAnimals()
+    public void MoveAnimals()
     {
         if (_gardenBeds.Length != 0)
         {
