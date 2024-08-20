@@ -5,50 +5,51 @@ using static UnityEditor.Experimental.GraphView.GraphView;
 
 public class CheckPlacement : MonoBehaviour
 {
-    private BuildingSystem buildingSystem;
-    private bool IsCollidersHere;
+    private BuildingSystem _buildingSystem;
+    private bool _isCollidersHere;
     [SerializeField]
-    private Renderer MainRenderer;
-    // Проверочная строка
+    private Renderer _mainRenderer;
+    [SerializeField]
+    private float _radius;
     void Start()
     {
-        buildingSystem = BuildingSystem.Instance;
+        _buildingSystem = BuildingSystem.Instance;
     }
 
     public void SetTransparent(bool CanPlace)
     {
         if (CanPlace)
         {
-            MainRenderer.material.color = Color.green;
+            _mainRenderer.material.color = Color.green;
         }
         else
         {
-            MainRenderer.material.color = Color.red;
+            _mainRenderer.material.color = Color.red;
         }
     }
     public void SetNormal()
     {
-        MainRenderer.material.color = Color.white;
+        _mainRenderer.material.color = Color.white;
     }
 
     private void Update()
     {
         IsPlaceble();
-        if (IsCollidersHere)
+        if (_isCollidersHere)
         {
-            buildingSystem.CanPlace = false;
+            _buildingSystem.CanPlace = false;
         }
         else
         {
-            buildingSystem.CanPlace = true;
+            _buildingSystem.CanPlace = true;
         }
     }
 
     
     private void IsPlaceble()
     {
-        Collider[] colliders = Physics.OverlapSphere(transform.position, 4f);
-        IsCollidersHere = colliders.Length > 2;
+        Collider[] colliders = Physics.OverlapSphere(transform.position, _radius);
+        _isCollidersHere = colliders.Length > 2;
     }
 
     private void OnDrawGizmos()

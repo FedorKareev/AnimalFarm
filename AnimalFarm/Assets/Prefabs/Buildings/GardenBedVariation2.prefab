@@ -950,7 +950,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 15ff0d29fcbbb9b419d80f7fc20274a8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  MainRenderer: {fileID: 2319294276534684226}
+  _mainRenderer: {fileID: 2319294276534684226}
+  _radius: 4
 --- !u!114 &8247746671483893533
 MonoBehaviour:
   m_ObjectHideFlags: 0
