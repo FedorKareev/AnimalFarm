@@ -33,6 +33,7 @@ public class CheckPlacement : MonoBehaviour
 
     private void Update()
     {
+        IsPlaceble();
         if (IsCollidersHere)
         {
             buildingSystem.CanPlace = false;
