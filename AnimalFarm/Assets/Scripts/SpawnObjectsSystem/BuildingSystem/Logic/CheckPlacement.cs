@@ -9,7 +9,7 @@ public class CheckPlacement : MonoBehaviour
     private bool IsCollidersHere;
     [SerializeField]
     private Renderer MainRenderer;
-
+    // Проверочная строка
     void Start()
     {
         buildingSystem = BuildingSystem.Instance;
