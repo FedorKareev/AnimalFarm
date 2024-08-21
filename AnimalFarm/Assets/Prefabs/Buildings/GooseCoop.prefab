@@ -381,10 +381,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _gooses: []
   _gardenBeds: []
-  _market: {fileID: 0}
   _gooseCoopPanel: {fileID: 3466428401736175694}
   _goose: {fileID: 5282443742050028155, guid: e38b38b53360b1e4897521cc733e1a12, type: 3}
-  itemData: {fileID: 11400000, guid: 8d14981acdc1f394087ca977e958106d, type: 2}
+  <itemData>k__BackingField: {fileID: 11400000, guid: 8d14981acdc1f394087ca977e958106d, type: 2}
 --- !u!114 &-3579535177233334548
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1215,7 +1214,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 5111533467732828566}
         m_TargetAssemblyTypeName: "Duck\u0421oop, Assembly-CSharp"
-        m_MethodName: DeleteGooseCoop
+        m_MethodName: DestroyBuilding
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}

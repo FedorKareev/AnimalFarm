@@ -2,9 +2,9 @@ using System;
 using System.Collections;
 using UnityEngine;
 
-public class GardenbedScript : SpawnObjectsBase
+public class GardenbedScript : SpawnObjectsBase, IDestroyer
 {
-    public const int TIMEFOR_COLLECT = 5;
+    public const int TIMEFOR_COLLECT = 2;
 
     [SerializeField]
     protected GameObject[] objectsToSpawn;
@@ -14,26 +14,14 @@ public class GardenbedScript : SpawnObjectsBase
     private float _timeMultiplier;
     [SerializeField]
     private GameObject vegetableSelectionMenu;
-    [SerializeField]
-    private ItemData itemData;
+    [field: SerializeField]
+    public ItemData itemData { get; set; }
 
     private bool isAbleToOpen;
     private GameObject _plantedObject;
     private Plant rightPlant;
 
     public static event Action onSpawn;
-
-    public ItemData ItemData
-    {
-        get
-        {
-            return itemData;
-        }
-        set
-        {
-            itemData = value;
-        }
-    }
 
     private void Start()
     {
@@ -98,7 +86,7 @@ public class GardenbedScript : SpawnObjectsBase
         }
     }
 
-    public void DeleteGardenBed()
+    public void DestroyBuilding()
     {
         itemData.Amount++;
         Destroy(gameObject);

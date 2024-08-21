@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine.UI;
 using UnityEngine;
 
-public class DuckСoop : MonoBehaviour
+public class DuckСoop : MonoBehaviour, IDestroyer
 {
     private Market _market;
 
@@ -15,9 +15,9 @@ public class DuckСoop : MonoBehaviour
     private GameObject _gooseCoopPanel;
     [SerializeField]
     private GameObject _goose;
-    [SerializeField]
-    private ItemData itemData;
-    
+    [field: SerializeField]
+    public ItemData itemData { get; set; }
+
     public ItemData ItemData
     {
         get
@@ -70,7 +70,7 @@ public class DuckСoop : MonoBehaviour
             }
         }
     }
-    public void DeleteGooseCoop()
+    public void DestroyBuilding()
     {
         itemData.Amount++;
         Destroy(gameObject);

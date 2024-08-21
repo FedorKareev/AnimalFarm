@@ -53,10 +53,14 @@ public class BuildingSystem : SpawnObjectsBase
             pos = hit.point;
         }
     }
-    private void ResetPendingObject()
+    private void OnDisable()
     {
-        Destroy(pendingObject);
-        IsSpawned = false;
+        if (pendingObject != null)
+        {
+            pendingObject.GetComponent<IDestroyer>().itemData.Amount++;
+            Destroy(pendingObject);
+            IsSpawned = false;
+        }
     }
     private void RotateObjects()
     {
