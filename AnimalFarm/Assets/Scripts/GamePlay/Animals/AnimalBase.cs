@@ -37,6 +37,17 @@ public class AnimalBase : MonoBehaviour
             startPosition = value;
         }
     }
+    public Transform Market
+    {
+        get
+        {
+            return _market;
+        }
+        set
+        {
+            _market = value;
+        }
+    }
 
     public Transform Target
     {
