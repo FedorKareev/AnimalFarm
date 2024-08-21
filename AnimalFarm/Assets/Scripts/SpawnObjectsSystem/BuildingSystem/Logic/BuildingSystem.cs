@@ -58,6 +58,12 @@ public class BuildingSystem : SpawnObjectsBase
         IsSpawned = false;
     }
 
+    private void OnDisable()
+    {
+
+        Destroy(pendingObject);
+    }
+
     private void FixedUpdate()
     {
         Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);

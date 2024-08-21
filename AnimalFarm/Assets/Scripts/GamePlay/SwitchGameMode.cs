@@ -5,11 +5,12 @@ using UnityEngine.SceneManagement;
 
 public class SwitchGameMode : MonoBehaviour
 {
+    private bool IsBuildingOn;
+
     [SerializeField]
     private GameObject buildingPanel, virtualCam1;
     [SerializeField]
     private PlayerMovement playerMovementScript;
-    private bool IsBuildingOn;
 
     private void Start()
     {
