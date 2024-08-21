@@ -5,16 +5,30 @@ using UnityEngine;
 
 public class DuckСoop : MonoBehaviour
 {
+    private Market _market;
+
     [SerializeField]
     private List<AnimalBase> _gooses = new List<AnimalBase>();
     [SerializeField]
     private GardenbedScript[] _gardenBeds;
     [SerializeField]
-    private Market _market;
-    [SerializeField]
     private GameObject _gooseCoopPanel;
     [SerializeField]
     private GameObject _goose;
+    [SerializeField]
+    private ItemData itemData;
+    
+    public ItemData ItemData
+    {
+        get
+        {
+            return itemData;
+        }
+        set
+        {
+            itemData = value;
+        }
+    }
 
     private void Start()
     {
@@ -55,5 +69,10 @@ public class DuckСoop : MonoBehaviour
                 _gooses[i].IsMoveSwitcher();
             }
         }
+    }
+    public void DeleteGooseCoop()
+    {
+        itemData.Amount++;
+        Destroy(gameObject);
     }
 }

@@ -32,6 +32,45 @@ public class BuildingSystem : SpawnObjectsBase
     }
     void Update()
     {
+        SpawnObject();
+    }
+
+    public void PlaceObject()
+    {
+        pendingObject.GetComponent<CheckPlacement>().SetNormal();
+        pendingObject.GetComponent<CheckPlacement>().enabled = false;
+        pendingObject = null;
+        IsSpawned = false;
+    }
+
+    private void FixedUpdate()
+    {
+        Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
+        int rayDistance = 1000;
+
+        if (Physics.Raycast(ray, out hit, rayDistance, layerMask))
+        {
+            pos = hit.point;
+        }
+    }
+    private void ResetPendingObject()
+    {
+        Destroy(pendingObject);
+        IsSpawned = false;
+    }
+    private void RotateObjects()
+    {
+        pendingObject.transform.Rotate(0, rotateDigrees, 0);
+    }
+
+    public override void SelectObject(int index)
+    {
+        pendingObject = Instantiate(buildings[index], pos, transform.rotation);
+        IsSpawned = true;
+    }
+
+    private void SpawnObject()
+    {
         if (pendingObject != null)
         {
             pendingObject.transform.position = new Vector3(
@@ -46,44 +85,12 @@ public class BuildingSystem : SpawnObjectsBase
             }
             if (Input.GetMouseButton(0) && CanPlace)
             {
+                Debug.Log("Это метод спавна");
                 PlaceObject();
             }
         }
     }
 
-    public void PlaceObject()
-    {
-        pendingObject.GetComponent<CheckPlacement>().SetNormal();
-        pendingObject = null;
-        IsSpawned = false;
-    }
-
-    private void OnDisable()
-    {
-
-        Destroy(pendingObject);
-    }
-
-    private void FixedUpdate()
-    {
-        Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
-        int rayDistance = 1000;
-
-        if (Physics.Raycast(ray, out hit, rayDistance, layerMask))
-        {
-            pos = hit.point;
-        }
-    }
-    private void RotateObjects()
-    {
-        pendingObject.transform.Rotate(0, rotateDigrees, 0);
-    }
-
-    public override void SelectObject(int index)
-    {
-        pendingObject = Instantiate(buildings[index], pos, transform.rotation);
-        IsSpawned = true;
-    }
     private float RoundToNearestGrid(float pos)
     {
         float xDiff = pos % gridSize;

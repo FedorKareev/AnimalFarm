@@ -14,21 +14,24 @@ public class GardenbedScript : SpawnObjectsBase
     private float _timeMultiplier;
     [SerializeField]
     private GameObject vegetableSelectionMenu;
+    [SerializeField]
+    private ItemData itemData;
 
     private bool isAbleToOpen;
     private GameObject _plantedObject;
     private Plant rightPlant;
 
     public static event Action onSpawn;
-    public bool IsAbleToOpen
+
+    public ItemData ItemData
     {
         get
         {
-            return isAbleToOpen;
+            return itemData;
         }
         set
         {
-            isAbleToOpen = value;
+            itemData = value;
         }
     }
 
@@ -93,5 +96,11 @@ public class GardenbedScript : SpawnObjectsBase
         {
             Debug.Log("Ничего не посаженно");
         }
+    }
+
+    public void DeleteGardenBed()
+    {
+        itemData.Amount++;
+        Destroy(gameObject);
     }
 }

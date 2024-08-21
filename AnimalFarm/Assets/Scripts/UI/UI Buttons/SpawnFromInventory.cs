@@ -13,6 +13,7 @@ public class SpawnFromInventory : InventoryButton
 
     public void Subtractfrominventory()
     {
+
         if (inventoryData.Amount > 0 && !spawnObjectScript.IsSpawned)
         {
             inventoryData.Amount--;
