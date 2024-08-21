@@ -11,6 +11,8 @@ public class DuckСoop : MonoBehaviour
     [SerializeField]
     private GardenbedScript[] _gardenBeds;
     [SerializeField]
+    private Market _market;
+    [SerializeField]
     private GameObject _gooseCoopPanel;
 
     private void OnEnable()
@@ -23,7 +25,8 @@ public class DuckСoop : MonoBehaviour
     }
     private void AddTargets()
     {
-        _gardenBeds = GameObject.FindObjectsOfType<GardenbedScript>();
+        _gardenBeds = FindObjectsOfType<GardenbedScript>();
+        _market = FindObjectOfType<Market>();
     }
     private void OnMouseDown()
     {

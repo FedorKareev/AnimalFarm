@@ -15,19 +15,16 @@ enum State
 public class AnimalBase : MonoBehaviour
 {
     [SerializeField]
-    private Transform _target;
-    [SerializeField]
-    private Transform market;
-    [SerializeField]
     private int timer;
-
-    private Transform startPosition;
-    private NavMeshAgent agent;
-    private RandomWalk agentRandomWalk;
-    private float _destination;
-    private Action _onTargetPos;
     [SerializeField]
     private State state;
+
+    private Transform startPosition;
+    private Transform _target;
+    private Transform _market;
+    private NavMeshAgent _agent;
+    private float _destination;
+    private Action _onTargetPos;
 
     public Transform StartPosition
     {
@@ -66,9 +63,8 @@ public class AnimalBase : MonoBehaviour
 
     private void Awake()
     {
-        agent = GetComponent<NavMeshAgent>();
+        _agent = GetComponent<NavMeshAgent>();
         timer = GardenbedScript.TIMEFOR_COLLECT;
-        agentRandomWalk = GetComponent<RandomWalk>();
     }
 
     private void HandleMove()
@@ -85,13 +81,13 @@ public class AnimalBase : MonoBehaviour
     {
         _onTargetPos = onTargetPos;
         _target = target;
-        agent.SetDestination(_target.position);
+        _agent.SetDestination(_target.position);
         state = State.Moving;
     }
 
     private void OnStartPosition()
     {
-        agent.ResetPath();
+        _agent.ResetPath();
         state = State.OnStartPosition;
     }
 
@@ -112,8 +108,7 @@ public class AnimalBase : MonoBehaviour
     }
     public void IsMoveSwitcher()
     {
-        agentRandomWalk.enabled = false;
-        agent.enabled = true;
-        AnimalMove(_target, () => StartCoroutine(Timer(() => AnimalMove(market, () => StartCoroutine(Timer(() => AnimalMove(startPosition, ()=> OnStartPosition())))))));
+        _agent.enabled = true;
+        AnimalMove(_target, () => StartCoroutine(Timer(() => AnimalMove(_market, () => StartCoroutine(Timer(() => AnimalMove(startPosition, ()=> OnStartPosition())))))));
     }
 }
