@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine.UI;
 using UnityEngine;
 
-public class DuckСoop : MonoBehaviour, IDestroyer
+public class DuckСoop : SpawnObjectsBase, IDestroyer
 {
     private Market _market;
 
@@ -17,18 +17,6 @@ public class DuckСoop : MonoBehaviour, IDestroyer
     private GameObject _goose;
     [field: SerializeField]
     public ItemData itemData { get; set; }
-
-    public ItemData ItemData
-    {
-        get
-        {
-            return itemData;
-        }
-        set
-        {
-            itemData = value;
-        }
-    }
 
     private void Start()
     {
@@ -48,7 +36,7 @@ public class DuckСoop : MonoBehaviour, IDestroyer
     {
         _gardenBeds = FindObjectsOfType<GardenbedScript>();
     }
-    public void SpawnGooses()
+    public override void SelectObject(int Index)
     {
         GameObject goose = Instantiate(_goose, transform.position + new Vector3(Random.Range(5, 0), transform.position.y, Random.Range(5, 0)), Quaternion.identity);
         _gooses.Add(goose.GetComponent<AnimalBase>());
@@ -74,5 +62,9 @@ public class DuckСoop : MonoBehaviour, IDestroyer
     {
         itemData.Amount++;
         Destroy(gameObject);
+        foreach(var gooses in _gooses)
+        {
+            Destroy(gooses.gameObject);
+        }
     }
 }
