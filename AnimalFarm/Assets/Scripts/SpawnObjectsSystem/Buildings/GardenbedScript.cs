@@ -1,5 +1,6 @@
 using System;
 using System.Collections;
+using TMPro;
 using UnityEngine;
 
 public class GardenbedScript : SpawnObjectsBase, IDestroyer
@@ -14,6 +15,9 @@ public class GardenbedScript : SpawnObjectsBase, IDestroyer
     private float _timeMultiplier;
     [SerializeField]
     private GameObject vegetableSelectionMenu;
+    [SerializeField]
+    private TextMeshPro _multiplierAmount;
+
     [field: SerializeField]
     public ItemData itemData { get; set; }
 
@@ -23,11 +27,25 @@ public class GardenbedScript : SpawnObjectsBase, IDestroyer
 
     public static event Action onSpawn;
 
+    public float TimeMultiplair
+    {
+        get
+        {
+            return _timeMultiplier;
+        }
+    }
+
     private void Start()
     {
-        DigVegetable();
+        SetHoles();
         onSpawn?.Invoke();
     }
+
+    private void Update()
+    {
+        _multiplierAmount.text = $"{_timeMultiplier.ToString()}X";
+    }
+
     private void OnMouseDown()
     {
         vegetableSelectionMenu.SetActive(true);
@@ -53,19 +71,25 @@ public class GardenbedScript : SpawnObjectsBase, IDestroyer
             }
         }
     }
-    public void DigVegetable()
+
+    private void SetHoles()
     {
-        for (int i = 0; i < spawnPoints.Length; i++)
-        {
-            if (IsSpawned == true)
-            {
-                Destroy(spawnPoints[i].GetChild(0).gameObject);
-            }
-        }
         for (int i = 0; i < spawnPoints.Length; i++)
         {
             Instantiate(objectsToSpawn[0], spawnPoints[i].position, Quaternion.identity, spawnPoints[i]);
             IsSpawned = false;
+        }
+    }
+
+    public void DigVegetable()
+    {
+        if (IsSpawned == true)
+        {
+            for (int i = 0; i < spawnPoints.Length; i++)
+            {
+                Destroy(spawnPoints[i].GetChild(0).gameObject);
+            }
+            SetHoles();
         }
     }
     public void CollectPlants()
