@@ -1100,8 +1100,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   objectsToSpawn:
   - {fileID: 8189335142238257542, guid: 39a7e1d772ee20a4498f0616cd180c1c, type: 3}
-  - {fileID: 8288255877446249248, guid: a36ffa0c462964c46a27b5e65d4c3c91, type: 3}
   - {fileID: 2949640723058158667, guid: 4637c4d67e8697e40839b6078d81e42a, type: 3}
+  - {fileID: 8288255877446249248, guid: a36ffa0c462964c46a27b5e65d4c3c91, type: 3}
   spawnPoints:
   - {fileID: 8159300709359373059}
   - {fileID: 7846428386118628535}
@@ -1495,7 +1495,7 @@ MonoBehaviour:
   amountCount: {fileID: 8771737114365337914}
   discriptionPlane: {fileID: 0}
   spawnObjectScript: {fileID: 8247746671483893533}
-  plantIndex: 1
+  plantIndex: 2
 --- !u!114 &8771737114365337914 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 8065404460800688738, guid: a3ced67ce35cf2b4286a649e999bf80f, type: 3}
@@ -1730,7 +1730,7 @@ MonoBehaviour:
   amountCount: {fileID: 6772087917077704726}
   discriptionPlane: {fileID: 0}
   spawnObjectScript: {fileID: 8247746671483893533}
-  plantIndex: 2
+  plantIndex: 1
 --- !u!1001 &4236362329698086492
 PrefabInstance:
   m_ObjectHideFlags: 0

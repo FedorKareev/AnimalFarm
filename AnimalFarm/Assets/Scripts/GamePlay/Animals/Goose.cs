@@ -2,25 +2,23 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Goose : MonoBehaviour
+public class Goose : AnimalBase
 {
-    [SerializeField]
-    private Transform gardenBedTransform;
-    [SerializeField]
-    private Transform marketTransform;
-
-    [SerializeField]
-    private AnimalWalk unit;
-
-    private void Awake()
+    private void OnTriggerEnter(Collider collider)
     {
-        unit = gameObject.GetComponent<AnimalWalk>();
-        unit.MoveTo(gardenBedTransform.position, () =>
+        GardenbedScript gardenBed = collider.gameObject.GetComponent<GardenbedScript>();
+        if (gardenBed != null && gardenBed.IsSpawned)
         {
-            unit.WaitForSeconds(3f, () =>
-            {
-                unit.MoveTo(marketTransform.position, null);
-            });
-        });
+            gardenBed.CollectPlants();
+        }
+    }
+    public void CollectPlants()
+    {
+        _agent.enabled = true;
+        AnimalMove(_target, () => StartCoroutine(Timer(() => AnimalMove(_market, () => StartCoroutine(Timer(() => AnimalMove(startPosition, () => OnStartPosition())))))));
+    }
+    private void PlantCrops()
+    {
+
     }
 }

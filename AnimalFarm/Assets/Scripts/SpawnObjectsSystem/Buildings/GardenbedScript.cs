@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class GardenbedScript : SpawnObjectsBase, IDestroyer
 {
-    public const int TIMEFOR_COLLECT = 2;
+    public const int TIMEFOR_COLLECT = 5;
 
     [SerializeField]
     protected GameObject[] objectsToSpawn;

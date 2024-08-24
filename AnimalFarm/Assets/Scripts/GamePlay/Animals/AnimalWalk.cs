@@ -10,10 +10,6 @@ public class AnimalWalk : MonoBehaviour, IUnit
 {
     [SerializeField]
     private NavMeshAgent agent;
-    private void Update()
-    {
-
-    }
 
     public void MoveTo(Vector3 position, System.Action arrivedAtPosition)
     {

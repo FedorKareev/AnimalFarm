@@ -8,7 +8,7 @@ public class DuckСoop : SpawnObjectsBase, IDestroyer
     private Market _market;
 
     [SerializeField]
-    private List<AnimalBase> _gooses = new List<AnimalBase>();
+    private List<Goose> _gooses = new List<Goose>();
     [SerializeField]
     private GardenbedScript[] _gardenBeds;
     [SerializeField]
@@ -39,7 +39,7 @@ public class DuckСoop : SpawnObjectsBase, IDestroyer
     public override void SelectObject(int Index)
     {
         GameObject goose = Instantiate(_goose, transform.position + new Vector3(Random.Range(5, 0), transform.position.y, Random.Range(5, 0)), Quaternion.identity);
-        _gooses.Add(goose.GetComponent<AnimalBase>());
+        _gooses.Add(goose.GetComponent<Goose>());
     }
     private void OnMouseDown()
     {
@@ -54,7 +54,7 @@ public class DuckСoop : SpawnObjectsBase, IDestroyer
                 _gooses[i].Target = _gardenBeds[UnityEngine.Random.Range(0, _gardenBeds.Length)].transform;
                 _gooses[i].Market = _market.transform;
                 _gooses[i].StartPosition = gameObject.transform;
-                _gooses[i].IsMoveSwitcher();
+                _gooses[i].CollectPlants();
             }
         }
     }

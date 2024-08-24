@@ -4,7 +4,7 @@ using Unity.AI.Navigation.Samples;
 using UnityEngine;
 using UnityEngine.AI;
 
-enum State
+public enum State
 {
     Idle,
     Moving,
@@ -14,17 +14,14 @@ enum State
 [RequireComponent(typeof(NavMeshAgent))]
 public class AnimalBase : MonoBehaviour
 {
-    [SerializeField]
-    private int timer;
-    [SerializeField]
-    private State state;
-
-    private Transform startPosition;
-    private Transform _target;
-    private Transform _market;
-    private NavMeshAgent _agent;
-    private float _destination;
-    private Action _onTargetPos;
+    protected State state;
+    protected int timer;
+    protected Transform startPosition;
+    protected Transform _target;
+    protected Transform _market;
+    protected NavMeshAgent _agent;
+    protected float _destination;
+    protected Action _onTargetPos;
 
     public Transform StartPosition
     {
@@ -78,7 +75,7 @@ public class AnimalBase : MonoBehaviour
         timer = GardenbedScript.TIMEFOR_COLLECT;
     }
 
-    private void HandleMove()
+    protected void HandleMove()
     {
         float destination = Vector3.Distance(transform.position, _target.position);
         if (destination <= 5)
@@ -88,7 +85,7 @@ public class AnimalBase : MonoBehaviour
         }
     }
 
-    private void AnimalMove(Transform target, Action onTargetPos)
+    protected void AnimalMove(Transform target, Action onTargetPos)
     {
         _onTargetPos = onTargetPos;
         _target = target;
@@ -96,30 +93,16 @@ public class AnimalBase : MonoBehaviour
         state = State.Moving;
     }
 
-    private void OnStartPosition()
+    protected void OnStartPosition()
     {
         _agent.ResetPath();
         state = State.OnStartPosition;
     }
 
-    private IEnumerator Timer(Action OnTimerEnd)
+    protected IEnumerator Timer(Action OnTimerEnd)
     {
         state = State.Idle;
         yield return new WaitForSeconds(timer);
         OnTimerEnd?.Invoke();
-    }
-
-    private void OnTriggerEnter(Collider collider)
-    {
-        GardenbedScript gardenBed = collider.gameObject.GetComponent<GardenbedScript>();
-        if (gardenBed != null && gardenBed.IsSpawned)
-        {
-            gardenBed.CollectPlants();
-        }
-    }
-    public void IsMoveSwitcher()
-    {
-        _agent.enabled = true;
-        AnimalMove(_target, () => StartCoroutine(Timer(() => AnimalMove(_market, () => StartCoroutine(Timer(() => AnimalMove(startPosition, ()=> OnStartPosition())))))));
     }
 }
