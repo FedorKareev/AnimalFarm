@@ -15,17 +15,18 @@ public class DuckСoop : SpawnObjectsBase, IDestroyer
     private GameObject _gooseCoopPanel;
     [SerializeField]
     private GameObject _goose;
-    private ItemData _manure;
-    private float _manureTimeSpawn = 60;
+    private int _manure;
+    private float _manureTimeSpawn = 10;
+    private float _timer;
 
     [field: SerializeField]
     public ItemData itemData { get; set; }
 
-    private void Update()
+    public int Manure
     {
-        if(_goose != null)
+        get
         {
-            StartCoroutine(ManurSpawnTimer());
+            return _manure;
         }
     }
 
@@ -33,6 +34,19 @@ public class DuckСoop : SpawnObjectsBase, IDestroyer
     {
         _gardenBeds = FindObjectsOfType<GardenbedScript>();
         _market = FindObjectOfType<Market>();
+    }
+    private void Update()
+    {
+        if (_gooses.Count != 0)
+        {
+            Debug.Log(_manureTimeSpawn);
+            _timer += Time.deltaTime;
+            if (_timer >= _manureTimeSpawn)
+            {
+                ManurSpawner();
+                _timer = 0f;
+            }
+        }
     }
 
     private void OnEnable()
@@ -49,12 +63,10 @@ public class DuckСoop : SpawnObjectsBase, IDestroyer
     }
     public override void SelectObject(int Index)
     {
-        if(_gooses.Count <= 4)
-        {
-            GameObject goose = Instantiate(_goose, transform.position + new Vector3(Random.Range(5, 0), transform.position.y, Random.Range(5, 0)), Quaternion.identity);
-            _gooses.Add(goose.GetComponent<Goose>());
-            _manureTimeSpawn /= 1.15f;
-        }
+        float gooseMultiplier = 1.15f;
+        GameObject goose = Instantiate(_goose, transform.position + new Vector3(Random.Range(5, 0), transform.position.y, Random.Range(5, 0)), Quaternion.identity);
+        _gooses.Add(goose.GetComponent<Goose>());
+        _manureTimeSpawn /= gooseMultiplier;
     }
     private void OnMouseDown()
     {
@@ -77,15 +89,18 @@ public class DuckСoop : SpawnObjectsBase, IDestroyer
     {
         itemData.Amount++;
         Destroy(gameObject);
-        foreach(var gooses in _gooses)
+        foreach (var gooses in _gooses)
         {
             Destroy(gooses.gameObject);
         }
     }
-
-    public IEnumerator ManurSpawnTimer()
+    public void ClearManure()
     {
-        yield return new WaitForSeconds(_manureTimeSpawn);
-        _manure.Amount++;
+        _manure = 0;
+    }
+
+    public void ManurSpawner()
+    {
+        _manure++;
     }
 }

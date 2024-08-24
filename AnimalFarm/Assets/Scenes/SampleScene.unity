@@ -2588,7 +2588,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 298989640}
-  m_LocalRotation: {x: 0.36243242, y: -3e-45, z: 1e-45, w: 0.93201005}
+  m_LocalRotation: {x: 0.36243242, y: 1e-45, z: -1e-45, w: 0.93201005}
   m_LocalPosition: {x: -8.53, y: 9.54, z: -5.3099995}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -6509,7 +6509,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 963194225}
-  m_LocalRotation: {x: 0.36243242, y: -3e-45, z: 1e-45, w: 0.93201005}
+  m_LocalRotation: {x: 0.36243242, y: 1e-45, z: -1e-45, w: 0.93201005}
   m_LocalPosition: {x: -8.53, y: 9.54, z: -5.3099995}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -9024,7 +9024,7 @@ MonoBehaviour:
   amountCount: {fileID: 1909129413}
   discriptionPlane: {fileID: 0}
   spawnObjectScript: {fileID: 1989277173}
-  plantIndex: 0
+  objectIndex: 0
 --- !u!114 &1333686762
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -10126,37 +10126,6 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1503763358}
   m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
---- !u!1 &1505355930
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 1505355931}
-  m_Layer: 0
-  m_Name: GooseCoop
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &1505355931
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1505355930}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 2.3354998, y: 4.1662827, z: 9.778168}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 0}
-  m_RootOrder: 19
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1507614732
 GameObject:
   m_ObjectHideFlags: 0
@@ -11967,7 +11936,7 @@ MonoBehaviour:
   amountCount: {fileID: 2067558389}
   discriptionPlane: {fileID: 0}
   spawnObjectScript: {fileID: 1989277173}
-  plantIndex: 1
+  objectIndex: 1
 --- !u!114 &1762703848
 MonoBehaviour:
   m_ObjectHideFlags: 0
