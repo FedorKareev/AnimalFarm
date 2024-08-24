@@ -1,7 +1,7 @@
-using System.Collections;
 using System.Collections.Generic;
-using UnityEngine.UI;
 using UnityEngine;
+using System.Collections;
+
 
 public class DuckСoop : SpawnObjectsBase, IDestroyer
 {
@@ -15,8 +15,19 @@ public class DuckСoop : SpawnObjectsBase, IDestroyer
     private GameObject _gooseCoopPanel;
     [SerializeField]
     private GameObject _goose;
+    private ItemData _manure;
+    private float _manureTimeSpawn = 60;
+
     [field: SerializeField]
     public ItemData itemData { get; set; }
+
+    private void Update()
+    {
+        if(_goose != null)
+        {
+            StartCoroutine(ManurSpawnTimer());
+        }
+    }
 
     private void Start()
     {
@@ -38,8 +49,12 @@ public class DuckСoop : SpawnObjectsBase, IDestroyer
     }
     public override void SelectObject(int Index)
     {
-        GameObject goose = Instantiate(_goose, transform.position + new Vector3(Random.Range(5, 0), transform.position.y, Random.Range(5, 0)), Quaternion.identity);
-        _gooses.Add(goose.GetComponent<Goose>());
+        if(_gooses.Count <= 4)
+        {
+            GameObject goose = Instantiate(_goose, transform.position + new Vector3(Random.Range(5, 0), transform.position.y, Random.Range(5, 0)), Quaternion.identity);
+            _gooses.Add(goose.GetComponent<Goose>());
+            _manureTimeSpawn /= 1.15f;
+        }
     }
     private void OnMouseDown()
     {
@@ -66,5 +81,11 @@ public class DuckСoop : SpawnObjectsBase, IDestroyer
         {
             Destroy(gooses.gameObject);
         }
+    }
+
+    public IEnumerator ManurSpawnTimer()
+    {
+        yield return new WaitForSeconds(_manureTimeSpawn);
+        _manure.Amount++;
     }
 }
