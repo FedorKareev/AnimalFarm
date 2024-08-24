@@ -11,7 +11,7 @@ public class SpawnFromInventory : InventoryButton
     [SerializeField]
     private int objectIndex;
 
-    public void Subtractfrominventory()
+    public virtual void Subtractfrominventory()
     {
 
         if (inventoryData.Amount > 0 && !spawnObjectScript.IsSpawned)

@@ -78,6 +78,7 @@ public class GardenbedScript : SpawnObjectsBase, IDestroyer
         if (_plantedObject != null && !_plantedObject.GetComponent<Plant>()._isMaturing)
         {
             _plantedObject.GetComponent<Plant>().ItemData.Amount += 1;
+            _timeMultiplier = 1;
             DigVegetable();
         }
         else
@@ -86,6 +87,10 @@ public class GardenbedScript : SpawnObjectsBase, IDestroyer
         }
     }
 
+    public void ChangeMultiplier(float multiplier)
+    {
+        _timeMultiplier = multiplier;
+    }
     public void DestroyBuilding()
     {
         itemData.Amount++;

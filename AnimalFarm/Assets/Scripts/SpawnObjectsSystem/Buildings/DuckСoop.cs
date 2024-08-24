@@ -16,7 +16,7 @@ public class DuckСoop : SpawnObjectsBase, IDestroyer
     [SerializeField]
     private GameObject _goose;
     private int _manure;
-    private float _manureTimeSpawn = 10;
+    private float _manureTimeSpawn = 30;
     private float _timer;
 
     [field: SerializeField]

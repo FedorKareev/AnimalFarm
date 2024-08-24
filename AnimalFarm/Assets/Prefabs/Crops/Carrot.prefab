@@ -128,7 +128,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 281431478e4650948ba30f2b7cff0a34, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _timeToMaturity: 60
+  _timeToMaturity: 30
   cropsStateMeshes:
   - {fileID: -7650123257291483136, guid: c3568e678d846a349a694e4904eb4247, type: 3}
   - {fileID: -336103021598580943, guid: b6057923f0edb7740b13530500332163, type: 3}
