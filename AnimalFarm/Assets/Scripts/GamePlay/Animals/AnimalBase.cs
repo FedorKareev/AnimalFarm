@@ -22,6 +22,8 @@ public class AnimalBase : MonoBehaviour
     protected NavMeshAgent _agent;
     protected float _destination;
     protected Action _onTargetPos;
+    [SerializeField]
+    protected ItemData _animal;
 
     public Transform StartPosition
     {

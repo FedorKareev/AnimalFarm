@@ -6,6 +6,18 @@ public class Goose : AnimalBase
 {
     private bool _isCollecting;
 
+    public ItemData Animal
+    {
+        get
+        {
+            return _animal;
+        }
+        set
+        {
+            _animal = value;
+        }
+    }
+
     private void OnTriggerEnter(Collider collider)
     {
         GardenbedScript gardenBed = collider.gameObject.GetComponent<GardenbedScript>();

@@ -1,6 +1,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using System.Collections;
+using TMPro;
 
 
 public class DuckСoop : SpawnObjectsBase, IDestroyer
@@ -15,6 +16,9 @@ public class DuckСoop : SpawnObjectsBase, IDestroyer
     private GameObject _gooseCoopPanel;
     [SerializeField]
     private GameObject _goose;
+    [SerializeField]
+    private TextMeshPro _ammountOfGoosesText;
+
     private int _manure;
     private float _manureTimeSpawn = 30;
     private float _timer;
@@ -47,6 +51,7 @@ public class DuckСoop : SpawnObjectsBase, IDestroyer
                 _timer = 0f;
             }
         }
+        _ammountOfGoosesText.text = $"{_gooses.Count.ToString()}/4";
     }
 
     private void OnEnable()
@@ -63,10 +68,17 @@ public class DuckСoop : SpawnObjectsBase, IDestroyer
     }
     public override void SelectObject(int Index)
     {
-        float gooseMultiplier = 1.15f;
-        GameObject goose = Instantiate(_goose, transform.position + new Vector3(Random.Range(5, 0), transform.position.y, Random.Range(5, 0)), Quaternion.identity);
-        _gooses.Add(goose.GetComponent<Goose>());
-        _manureTimeSpawn /= gooseMultiplier;
+        if (_gooses.Count < 4)
+        {
+            float gooseMultiplier = 1.15f;
+            GameObject goose = Instantiate(_goose, transform.position + new Vector3(Random.Range(5, 0), transform.position.y, Random.Range(5, 0)), Quaternion.identity);
+            _gooses.Add(goose.GetComponent<Goose>());
+            _manureTimeSpawn /= gooseMultiplier;
+        }
+        else
+        {
+            _goose.GetComponent<Goose>().Animal.Amount++;
+        }
     }
     private void OnMouseDown()
     {

@@ -77,7 +77,7 @@ public class GardenbedScript : SpawnObjectsBase, IDestroyer
         yield return new WaitForSeconds(TIMEFOR_COLLECT);
         if (_plantedObject != null && !_plantedObject.GetComponent<Plant>()._isMaturing)
         {
-            _plantedObject.GetComponent<Plant>().ItemData.Amount += 1;
+            _plantedObject.GetComponent<Plant>().ItemData.Amount++;
             _timeMultiplier = 1;
             DigVegetable();
         }
