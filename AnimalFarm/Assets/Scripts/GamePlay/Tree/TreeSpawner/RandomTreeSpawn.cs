@@ -11,7 +11,7 @@ public class RandomTreeSpawn : MonoBehaviour
     [SerializeField]
     private LayerMask ignorLayers;
 
-    private float _delayTime = 1;
+    private float _delayTime = 50;
     private float _timer = 0;
     private TreeHealth[] _treesOnScene;
 
