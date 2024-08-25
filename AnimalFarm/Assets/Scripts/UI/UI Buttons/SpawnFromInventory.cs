@@ -9,15 +9,15 @@ public class SpawnFromInventory : InventoryButton
     [SerializeField]
     private SpawnObjectsBase spawnObjectScript;
     [SerializeField]
-    private int plantIndex;
+    private int objectIndex;
 
-    public void Subtractfrominventory()
+    public virtual void Subtractfrominventory()
     {
 
         if (inventoryData.Amount > 0 && !spawnObjectScript.IsSpawned)
         {
             inventoryData.Amount--;
-            spawnObjectScript.SelectObject(plantIndex);
+            spawnObjectScript.SelectObject(objectIndex);
         }
     }
 }

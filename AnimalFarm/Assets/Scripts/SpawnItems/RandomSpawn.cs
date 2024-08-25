@@ -6,7 +6,9 @@ public enum Goods
 {
     Tomato,
     Carrot,
-    Gardenbed
+    Gardenbed,
+    GooseCoop,
+    Goose
 }
 public class RandomSpawn : MonoBehaviour
 {

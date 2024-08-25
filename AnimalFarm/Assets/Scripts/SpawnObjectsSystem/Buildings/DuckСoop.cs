@@ -1,15 +1,58 @@
-using System;
-using System.Collections;
 using System.Collections.Generic;
-using Unity.Mathematics;
 using UnityEngine;
+using System.Collections;
+using TMPro;
 
-public class DuckСoop : MonoBehaviour
+
+public class DuckСoop : SpawnObjectsBase, IDestroyer
 {
+    private Market _market;
+
     [SerializeField]
-    private List<AnimalBase> _ducks = new List<AnimalBase>();
+    private List<Goose> _gooses = new List<Goose>();
     [SerializeField]
     private GardenbedScript[] _gardenBeds;
+    [SerializeField]
+    private GameObject _gooseCoopPanel;
+    [SerializeField]
+    private GameObject _goose;
+    [SerializeField]
+    private TextMeshPro _ammountOfGoosesText;
+
+    private int _manure;
+    private float _manureTimeSpawn = 30;
+    private float _timer;
+
+    [field: SerializeField]
+    public ItemData itemData { get; set; }
+
+    public int Manure
+    {
+        get
+        {
+            return _manure;
+        }
+    }
+
+    private void Start()
+    {
+        _gardenBeds = FindObjectsOfType<GardenbedScript>();
+        _market = FindObjectOfType<Market>();
+    }
+    private void Update()
+    {
+        if (_gooses.Count != 0)
+        {
+            Debug.Log(_manureTimeSpawn);
+            _timer += Time.deltaTime;
+            if (_timer >= _manureTimeSpawn)
+            {
+                ManurSpawner();
+                _timer = 0f;
+            }
+        }
+        _ammountOfGoosesText.text = $"{_gooses.Count.ToString()}/4";
+    }
 
     private void OnEnable()
     {
@@ -21,23 +64,55 @@ public class DuckСoop : MonoBehaviour
     }
     private void AddTargets()
     {
-        _gardenBeds = GameObject.FindObjectsOfType<GardenbedScript>();
+        _gardenBeds = FindObjectsOfType<GardenbedScript>();
+    }
+    public override void SelectObject(int Index)
+    {
+        if (_gooses.Count < 4)
+        {
+            float gooseMultiplier = 1.15f;
+            GameObject goose = Instantiate(_goose, transform.position + new Vector3(Random.Range(5, 0), transform.position.y, Random.Range(5, 0)), Quaternion.identity);
+            _gooses.Add(goose.GetComponent<Goose>());
+            _manureTimeSpawn /= gooseMultiplier;
+        }
+        else
+        {
+            _goose.GetComponent<Goose>().Animal.Amount++;
+        }
     }
     private void OnMouseDown()
     {
-        MoveAnimals();
-        Debug.Log("Кнопка нажата");
+        _gooseCoopPanel.SetActive(true);
     }
-    private void MoveAnimals()
+    public void MoveAnimals()
     {
         if (_gardenBeds.Length != 0)
         {
-            for (int i = 0; i < _ducks.Count; i++)
+            for (int i = 0; i < _gooses.Count; i++)
             {
-                _ducks[i].Target = _gardenBeds[UnityEngine.Random.Range(0, _gardenBeds.Length)].transform;
-                _ducks[i].StartPosition = gameObject.transform;
-                _ducks[i].IsMoveSwitcher();
+                _gooses[i].Target = _gardenBeds[UnityEngine.Random.Range(0, _gardenBeds.Length)].transform;
+                _gooses[i].Market = _market.transform;
+                _gooses[i].StartPosition = gameObject.transform;
+                _gooses[i].CollectPlants();
             }
         }
+    }
+    public void DestroyBuilding()
+    {
+        itemData.Amount++;
+        Destroy(gameObject);
+        foreach (var gooses in _gooses)
+        {
+            Destroy(gooses.gameObject);
+        }
+    }
+    public void ClearManure()
+    {
+        _manure = 0;
+    }
+
+    public void ManurSpawner()
+    {
+        _manure++;
     }
 }

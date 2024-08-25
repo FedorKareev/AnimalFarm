@@ -4,7 +4,7 @@ using Unity.AI.Navigation.Samples;
 using UnityEngine;
 using UnityEngine.AI;
 
-enum State
+public enum State
 {
     Idle,
     Moving,
@@ -14,20 +14,16 @@ enum State
 [RequireComponent(typeof(NavMeshAgent))]
 public class AnimalBase : MonoBehaviour
 {
+    protected State state;
+    protected int timer;
+    protected Transform startPosition;
+    protected Transform _target;
+    protected Transform _market;
+    protected NavMeshAgent _agent;
+    protected float _destination;
+    protected Action _onTargetPos;
     [SerializeField]
-    private Transform _target;
-    [SerializeField]
-    private Transform market;
-    [SerializeField]
-    private int timer;
-
-    private Transform startPosition;
-    private NavMeshAgent agent;
-    private RandomWalk agentRandomWalk;
-    private float _destination;
-    private Action _onTargetPos;
-    [SerializeField]
-    private State state;
+    protected ItemData _animal;
 
     public Transform StartPosition
     {
@@ -38,6 +34,17 @@ public class AnimalBase : MonoBehaviour
         set
         {
             startPosition = value;
+        }
+    }
+    public Transform Market
+    {
+        get
+        {
+            return _market;
+        }
+        set
+        {
+            _market = value;
         }
     }
 
@@ -66,12 +73,11 @@ public class AnimalBase : MonoBehaviour
 
     private void Awake()
     {
-        agent = GetComponent<NavMeshAgent>();
+        _agent = GetComponent<NavMeshAgent>();
         timer = GardenbedScript.TIMEFOR_COLLECT;
-        agentRandomWalk = GetComponent<RandomWalk>();
     }
 
-    private void HandleMove()
+    protected void HandleMove()
     {
         float destination = Vector3.Distance(transform.position, _target.position);
         if (destination <= 5)
@@ -81,39 +87,24 @@ public class AnimalBase : MonoBehaviour
         }
     }
 
-    private void AnimalMove(Transform target, Action onTargetPos)
+    protected void AnimalMove(Transform target, Action onTargetPos)
     {
         _onTargetPos = onTargetPos;
         _target = target;
-        agent.SetDestination(_target.position);
+        _agent.SetDestination(_target.position);
         state = State.Moving;
     }
 
-    private void OnStartPosition()
+    protected void OnStartPosition()
     {
-        agent.ResetPath();
+        _agent.ResetPath();
         state = State.OnStartPosition;
     }
 
-    private IEnumerator Timer(Action OnTimerEnd)
+    protected IEnumerator Timer(Action OnTimerEnd)
     {
         state = State.Idle;
         yield return new WaitForSeconds(timer);
         OnTimerEnd?.Invoke();
-    }
-
-    private void OnTriggerEnter(Collider collider)
-    {
-        GardenbedScript gardenBed = collider.gameObject.GetComponent<GardenbedScript>();
-        if (gardenBed != null && gardenBed.IsSpawned)
-        {
-            gardenBed.CollectPlants();
-        }
-    }
-    public void IsMoveSwitcher()
-    {
-        agentRandomWalk.enabled = false;
-        agent.enabled = true;
-        AnimalMove(_target, () => StartCoroutine(Timer(() => AnimalMove(market, () => StartCoroutine(Timer(() => AnimalMove(startPosition, ()=> OnStartPosition())))))));
     }
 }

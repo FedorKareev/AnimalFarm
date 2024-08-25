@@ -19,7 +19,7 @@ public class ToolSystem : MonoBehaviour
 
     private void Update()
     {
-        if (Input.GetKeyDown(KeyCode.I))
+        if (Input.GetKeyDown(KeyCode.Alpha1))
         {
             if (!isAxeUse)
             {

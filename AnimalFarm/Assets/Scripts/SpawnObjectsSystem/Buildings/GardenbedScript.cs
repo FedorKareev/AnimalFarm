@@ -1,8 +1,9 @@
 using System;
 using System.Collections;
+using TMPro;
 using UnityEngine;
 
-public class GardenbedScript : SpawnObjectsBase
+public class GardenbedScript : SpawnObjectsBase, IDestroyer
 {
     public const int TIMEFOR_COLLECT = 5;
 
@@ -14,29 +15,37 @@ public class GardenbedScript : SpawnObjectsBase
     private float _timeMultiplier;
     [SerializeField]
     private GameObject vegetableSelectionMenu;
+    [SerializeField]
+    private TextMeshPro _multiplierAmount;
+
+    [field: SerializeField]
+    public ItemData itemData { get; set; }
 
     private bool isAbleToOpen;
     private GameObject _plantedObject;
     private Plant rightPlant;
 
     public static event Action onSpawn;
-    public bool IsAbleToOpen
+
+    public float TimeMultiplair
     {
         get
         {
-            return isAbleToOpen;
-        }
-        set
-        {
-            isAbleToOpen = value;
+            return _timeMultiplier;
         }
     }
 
     private void Start()
     {
-        DigVegetable();
+        SetHoles();
         onSpawn?.Invoke();
     }
+
+    private void Update()
+    {
+        _multiplierAmount.text = $"{_timeMultiplier.ToString()}X";
+    }
+
     private void OnMouseDown()
     {
         vegetableSelectionMenu.SetActive(true);
@@ -62,19 +71,25 @@ public class GardenbedScript : SpawnObjectsBase
             }
         }
     }
-    public void DigVegetable()
+
+    private void SetHoles()
     {
-        for (int i = 0; i < spawnPoints.Length; i++)
-        {
-            if (IsSpawned == true)
-            {
-                Destroy(spawnPoints[i].GetChild(0).gameObject);
-            }
-        }
         for (int i = 0; i < spawnPoints.Length; i++)
         {
             Instantiate(objectsToSpawn[0], spawnPoints[i].position, Quaternion.identity, spawnPoints[i]);
             IsSpawned = false;
+        }
+    }
+
+    public void DigVegetable()
+    {
+        if (IsSpawned == true)
+        {
+            for (int i = 0; i < spawnPoints.Length; i++)
+            {
+                Destroy(spawnPoints[i].GetChild(0).gameObject);
+            }
+            SetHoles();
         }
     }
     public void CollectPlants()
@@ -86,12 +101,23 @@ public class GardenbedScript : SpawnObjectsBase
         yield return new WaitForSeconds(TIMEFOR_COLLECT);
         if (_plantedObject != null && !_plantedObject.GetComponent<Plant>()._isMaturing)
         {
-            _plantedObject.GetComponent<Plant>().ItemData.Amount += 1;
+            _plantedObject.GetComponent<Plant>().ItemData.Amount++;
+            _timeMultiplier = 1;
             DigVegetable();
         }
         else
         {
             Debug.Log("Ничего не посаженно");
         }
+    }
+
+    public void ChangeMultiplier(float multiplier)
+    {
+        _timeMultiplier = multiplier;
+    }
+    public void DestroyBuilding()
+    {
+        itemData.Amount++;
+        Destroy(gameObject);
     }
 }

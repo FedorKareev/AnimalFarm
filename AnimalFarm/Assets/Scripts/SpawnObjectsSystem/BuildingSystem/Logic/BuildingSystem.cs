@@ -32,28 +32,13 @@ public class BuildingSystem : SpawnObjectsBase
     }
     void Update()
     {
-        if (pendingObject != null)
-        {
-            pendingObject.transform.position = new Vector3(
-                RoundToNearestGrid(pos.x),
-                RoundToNearestGrid(pos.y),
-                RoundToNearestGrid(pos.z));
-            pendingObject.GetComponent<CheckPlacement>().SetTransparent(CanPlace);
-
-            if (Input.GetKeyDown(KeyCode.R))
-            {
-                RotateObjects();
-            }
-            if (Input.GetMouseButton(0) && CanPlace)
-            {
-                PlaceObject();
-            }
-        }
+        SpawnObject();
     }
 
     public void PlaceObject()
     {
         pendingObject.GetComponent<CheckPlacement>().SetNormal();
+        pendingObject.GetComponent<CheckPlacement>().enabled = false;
         pendingObject = null;
         IsSpawned = false;
     }
@@ -68,6 +53,15 @@ public class BuildingSystem : SpawnObjectsBase
             pos = hit.point;
         }
     }
+    private void OnDisable()
+    {
+        if (pendingObject != null)
+        {
+            pendingObject.GetComponent<IDestroyer>().itemData.Amount++;
+            Destroy(pendingObject);
+            IsSpawned = false;
+        }
+    }
     private void RotateObjects()
     {
         pendingObject.transform.Rotate(0, rotateDigrees, 0);
@@ -78,6 +72,29 @@ public class BuildingSystem : SpawnObjectsBase
         pendingObject = Instantiate(buildings[index], pos, transform.rotation);
         IsSpawned = true;
     }
+
+    private void SpawnObject()
+    {
+        if (pendingObject != null)
+        {
+            pendingObject.transform.position = new Vector3(
+                RoundToNearestGrid(pos.x),
+                RoundToNearestGrid(pos.y),
+                RoundToNearestGrid(pos.z));
+            pendingObject.GetComponent<CheckPlacement>().SetTransparent(CanPlace);
+
+            if (Input.GetKeyDown(KeyCode.R))
+            {
+                RotateObjects();
+            }
+            if (Input.GetMouseButton(0) && CanPlace)
+            {
+                Debug.Log("Это метод спавна");
+                PlaceObject();
+            }
+        }
+    }
+
     private float RoundToNearestGrid(float pos)
     {
         float xDiff = pos % gridSize;

@@ -9,6 +9,7 @@ public class Money : MonoBehaviour
     private void Start()
     {
         _moneyCounter = GetComponent<Text>();
+        _money += 10000;
     }
 
     private void Update()
