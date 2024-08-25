@@ -1,13 +1,18 @@
 using System.Collections;
 using System.Collections.Generic;
+using UnityEditor.UIElements;
 using UnityEngine;
 
 public class RandomTreeSpawn : MonoBehaviour
 {
-    public GameObject prefabToSpawn; // Префаб, который нужно спавнить
-    public Transform spawnPlane; // Плоскость, на которой будет происходить спавн
-    public float spawnRadius = 5f;
-    private float _delayTime = 10;
+    [SerializeField]
+    private GameObject prefabToSpawn;
+    [SerializeField]
+    private Transform spawnPlane;
+    [SerializeField]
+    private LayerMask ignorLayers;
+
+    private float _delayTime = 50;
     private float _timer = 0;
 
     private void Update()
@@ -23,7 +28,7 @@ public class RandomTreeSpawn : MonoBehaviour
     private void InstansiateTrees()
     {
         Vector3 spawnPos = SpawnRadius();
-        if (!Physics.CheckSphere(spawnPos, 0.5f))
+        if (!Physics.CheckSphere(spawnPos, 1f, ignorLayers))
         {
             Instantiate(prefabToSpawn, spawnPos, Quaternion.identity);
         }
@@ -31,10 +36,7 @@ public class RandomTreeSpawn : MonoBehaviour
 
     private Vector3 SpawnRadius()
     {
-        Vector3 randomPosition = Random.insideUnitCircle * spawnRadius;
-        randomPosition = spawnPlane.position + randomPosition;
-        randomPosition.y = spawnPlane.position.y;
-
+        Vector3 randomPosition = transform.position + new Vector3(Random.Range(20, -20), transform.position.y, Random.Range(20, -20));
         return randomPosition;
     }
 }

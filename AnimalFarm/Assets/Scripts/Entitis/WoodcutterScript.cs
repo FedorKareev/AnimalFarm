@@ -15,10 +15,14 @@ public class WoodcutterScript : MonoBehaviour
 
     private void Update()
     {
-        Debug.DrawRay(transform.position, transform.forward * 2);
+        Debug.DrawRay(transform.position, transform.forward * 1.3f);
         if (ToolSystem.IsAxeUse())
         {
             CheckIsTreeHere();
+        }
+        else
+        {
+            isCuttingTree = false;
         }
     }
 
@@ -36,7 +40,7 @@ public class WoodcutterScript : MonoBehaviour
     {
         TreeHealth treeHealth;
         RaycastHit hit;
-        if (Physics.Raycast(transform.position, transform.forward, out hit, 2f, treeLayerNumber))
+        if (Physics.Raycast(transform.position, transform.forward, out hit, 1.3f, treeLayerNumber))
         {
             if (hit.transform.TryGetComponent(out treeHealth))
             {
