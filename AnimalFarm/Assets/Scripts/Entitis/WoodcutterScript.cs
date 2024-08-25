@@ -1,5 +1,3 @@
-using System.Collections;
-using UnityEditor.UIElements;
 using UnityEngine;
 
 public class WoodcutterScript : MonoBehaviour
