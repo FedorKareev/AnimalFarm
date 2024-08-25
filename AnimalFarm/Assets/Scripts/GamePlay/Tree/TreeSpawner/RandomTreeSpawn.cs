@@ -11,16 +11,21 @@ public class RandomTreeSpawn : MonoBehaviour
     [SerializeField]
     private LayerMask ignorLayers;
 
-    private float _delayTime = 50;
+    private float _delayTime = 1;
     private float _timer = 0;
+    private TreeHealth[] _treesOnScene;
 
     private void Update()
     {
-        _timer += Time.deltaTime;
-        if (_timer >= _delayTime)
+        _treesOnScene = FindObjectsOfType<TreeHealth>();
+        if(_treesOnScene.Length < 40)
         {
-            InstansiateTrees();
-            _timer = 0f;
+            _timer += Time.deltaTime;
+            if (_timer >= _delayTime)
+            {
+                InstansiateTrees();
+                _timer = 0f;
+            }
         }
     }
 
