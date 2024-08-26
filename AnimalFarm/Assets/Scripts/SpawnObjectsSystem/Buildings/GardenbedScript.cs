@@ -44,7 +44,7 @@ public class GardenbedScript : SpawnObjectsBase, IDestroyer
 
     private void Update()
     {
-        _multiplierAmount.text = $"{_timeMultiplier.ToString()}X";
+        _multiplierAmount.text = $"{Mathf.Floor(_timeMultiplier * 100)/100}X";
     }
 
     private void OnMouseDown()

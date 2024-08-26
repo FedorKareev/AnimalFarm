@@ -20,7 +20,7 @@ public class DuckСoop : SpawnObjectsBase, IDestroyer
     private TextMeshPro _ammountOfGoosesText;
 
     private int _manure;
-    private float _manureTimeSpawn = 30;
+    private float _manureTimeSpawn = 60;
     private float _timer;
 
     [field: SerializeField]
