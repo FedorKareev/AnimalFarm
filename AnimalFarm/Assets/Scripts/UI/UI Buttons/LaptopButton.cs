@@ -22,9 +22,9 @@ public class LaptopButton : InventoryButton
 
     public void BuyItem()
     {
-        if (_moneyScript._money >= inventoryData.PriceForBuy)
+        if (_moneyScript._amount >= inventoryData.PriceForBuy)
         {
-            _moneyScript._money -= inventoryData.PriceForBuy;
+            _moneyScript._amount -= inventoryData.PriceForBuy;
             _randomSpawn.SpawnInRadius(goods);
         }
         else

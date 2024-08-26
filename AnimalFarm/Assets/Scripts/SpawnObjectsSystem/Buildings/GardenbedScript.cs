@@ -6,6 +6,7 @@ using UnityEngine;
 public class GardenbedScript : SpawnObjectsBase, IDestroyer
 {
     public const int TIMEFOR_COLLECT = 5;
+    public static Action onSpawn;
 
     [SerializeField]
     protected GameObject[] objectsToSpawn;
@@ -24,10 +25,10 @@ public class GardenbedScript : SpawnObjectsBase, IDestroyer
     private bool isAbleToOpen;
     private GameObject _plantedObject;
     private Plant rightPlant;
+    private float _timeMultiplierByUpgrade = 1;
 
-    public static event Action onSpawn;
 
-    public float TimeMultiplair
+    public float TimeMultipleir
     {
         get
         {
@@ -50,6 +51,7 @@ public class GardenbedScript : SpawnObjectsBase, IDestroyer
     {
         vegetableSelectionMenu.SetActive(true);
     }
+
     public override void SelectObject(int Index)
     {
 
@@ -102,7 +104,7 @@ public class GardenbedScript : SpawnObjectsBase, IDestroyer
         if (_plantedObject != null && !_plantedObject.GetComponent<Plant>()._isMaturing)
         {
             _plantedObject.GetComponent<Plant>().ItemData.Amount++;
-            _timeMultiplier = 1;
+            _timeMultiplier = _timeMultiplierByUpgrade;
             DigVegetable();
         }
         else
@@ -111,9 +113,14 @@ public class GardenbedScript : SpawnObjectsBase, IDestroyer
         }
     }
 
-    public void ChangeMultiplier(float multiplier)
+    public void ChangeMultiplierByFertilizers(float multiplier)
     {
-        _timeMultiplier = multiplier;
+        _timeMultiplier += multiplier;
+    }
+    public void ChangeMultiplierByUpgrade(float multiplier)
+    {
+        _timeMultiplierByUpgrade += multiplier;
+        _timeMultiplier = _timeMultiplierByUpgrade;
     }
     public void DestroyBuilding()
     {

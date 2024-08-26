@@ -28,7 +28,7 @@ public class Market : MonoBehaviour
         {
             if (item.Amount > 0) 
             {
-                _money._money += item.PriceForSell * item.Amount;
+                _money._amount += item.PriceForSell * item.Amount;
                 item.Amount = 0;
             }
             else

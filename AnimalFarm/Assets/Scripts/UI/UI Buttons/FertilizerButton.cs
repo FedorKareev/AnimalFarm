@@ -8,10 +8,10 @@ public class FertilizerButton : InventoryButton
     private float _multiplaier;
     public void Subtractfrominventory()
     {
-        if (inventoryData.Amount > 0 && gardenbedScript.TimeMultiplair < _multiplaier && !gardenbedScript.IsSpawned)
+        if (inventoryData.Amount > 0 && !gardenbedScript.IsSpawned)
         {
             inventoryData.Amount--;
-            gardenbedScript.ChangeMultiplier(_multiplaier);
+            gardenbedScript.ChangeMultiplierByFertilizers(_multiplaier);
         }
     }
 }
