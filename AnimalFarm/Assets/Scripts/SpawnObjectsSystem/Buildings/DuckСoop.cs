@@ -20,7 +20,7 @@ public class DuckСoop : SpawnObjectsBase, IDestroyer
     private TextMeshPro _ammountOfGoosesText;
 
     private int _manure;
-    private float _manureTimeSpawn = 30;
+    private float _manureTimeSpawn = 60;
     private float _timer;
 
     [field: SerializeField]
@@ -71,7 +71,7 @@ public class DuckСoop : SpawnObjectsBase, IDestroyer
         if (_gooses.Count < 4)
         {
             float gooseMultiplier = 1.15f;
-            GameObject goose = Instantiate(_goose, transform.position + new Vector3(Random.Range(5, 0), transform.position.y, Random.Range(5, 0)), Quaternion.identity);
+            GameObject goose = Instantiate(_goose, transform.position + new Vector3(Random.Range(1, -1), transform.position.y, Random.Range(1, -1)), Quaternion.identity);
             _gooses.Add(goose.GetComponent<Goose>());
             _manureTimeSpawn /= gooseMultiplier;
         }

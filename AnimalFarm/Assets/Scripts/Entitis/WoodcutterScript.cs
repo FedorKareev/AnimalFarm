@@ -1,43 +1,61 @@
-using System.Collections;
 using UnityEngine;
 
 public class WoodcutterScript : MonoBehaviour
 {
     [SerializeField]
-    private int treeLayerNumber;
+    private LayerMask treeLayerNumber;
     [SerializeField]
     private float timeBeforeDestroy;
     [SerializeField]
     private ToolSystem ToolSystem;
     private bool isCuttingTree = false;
-    private Collider treeCollider;
+    private TreeHealth _treeHealth;
 
-    private void OnTriggerEnter(Collider tree)
+    private void Update()
     {
-        treeCollider = tree;
-        if (tree.gameObject.layer == treeLayerNumber && ToolSystem.IsAxeUse() == true)
+        Debug.DrawRay(transform.position, transform.forward * 1.3f);
+        if (ToolSystem.IsAxeUse())
         {
-            StartCoroutine(WaitToDestroyTree());
+            CheckIsTreeHere();
+        }
+        else
+        {
+            isCuttingTree = false;
         }
     }
-    private IEnumerator WaitToDestroyTree()
+
+    public void HitTheTree()
     {
-        while (true)
-        {
-            isCuttingTree = true;
-            yield return new WaitForSeconds(timeBeforeDestroy);
-            DestroyTree();
-        }
-    }
-    private void DestroyTree()
-    {
-        isCuttingTree = false;
-        Destroy(treeCollider.gameObject);
+        _treeHealth.TakeDamage(Random.Range(5, 10));
     }
 
     public bool IsCuttingTree()
     {
         return isCuttingTree;
+    }
+
+    private void CheckIsTreeHere()
+    {
+        TreeHealth treeHealth;
+        RaycastHit hit;
+        if (Physics.Raycast(transform.position, transform.forward, out hit, 1.3f, treeLayerNumber))
+        {
+            if (hit.transform.TryGetComponent(out treeHealth))
+            {
+                _treeHealth = treeHealth;
+                isCuttingTree = true;
+            }
+            else
+            {
+                _treeHealth = null;
+                isCuttingTree = false;
+            }
+        }
+        else
+        {
+            _treeHealth = null;
+            isCuttingTree = false;
+        }
     }
 }
 
