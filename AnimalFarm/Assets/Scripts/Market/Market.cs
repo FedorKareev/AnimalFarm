@@ -2,39 +2,32 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine.UI;
 using UnityEngine;
+using static UnityEditor.Progress;
 
 public class Market : MonoBehaviour
 {
     [SerializeField]
     private List<ItemData> _itemDatas = new List<ItemData>();
     [SerializeField]
-    private Text _moneyCounter;
-
+    private GameObject _marketUI;
     [SerializeField]
     private Money _money;
 
     private void OnTriggerEnter(Collider other)
     {
         Saller saller = other.GetComponent<Saller>();
-        if (saller != null) 
+        if (saller != null)
         {
-            Sall();
+            _marketUI.SetActive(true);
         }
     }
-    
-   private void Sall()
+
+    public void Sall(ItemData itemData)
     {
-        foreach (ItemData item in _itemDatas)
+        if (itemData.Amount > 0)
         {
-            if (item.Amount > 0) 
-            {
-                _money._amount += item.PriceForSell * item.Amount;
-                item.Amount = 0;
-            }
-            else
-            {
-                Debug.Log("ќвощей нет на продажу");
-            }
+            _money._amount += itemData.PriceForSell;
+            itemData.Amount--;
         }
     }
 }
