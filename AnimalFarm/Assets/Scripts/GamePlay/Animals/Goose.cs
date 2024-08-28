@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -5,6 +6,20 @@ using UnityEngine;
 public class Goose : AnimalBase
 {
     private bool _isCollecting;
+
+    private GardenbedScript _gardenBed;
+
+    public GardenbedScript GardenBed
+    {
+        get
+        {
+            return _gardenBed;
+        }
+        set
+        {
+            _gardenBed = value;
+        }
+    }
 
     public ItemData Animal
     {
@@ -26,10 +41,17 @@ public class Goose : AnimalBase
             gardenBed.CollectPlants();
         }
     }
+
+    protected void CollectPlants(Action onCollectPlants)
+    {
+        _gardenBed.CollectPlants();
+        onCollectPlants?.Invoke();
+    }
+
     public void CollectPlants()
     {
         _isCollecting = true;
         _agent.enabled = true;
-        AnimalMove(_target, () => StartCoroutine(Timer(() => StartCoroutine(Timer(() => AnimalMove(startPosition, () => OnStartPosition()))))));
+        AnimalMove(_target, () => CollectPlants(() => StartCoroutine(Timer(() => AnimalMove(startPosition, () => OnStartPosition())))));
     }
 }

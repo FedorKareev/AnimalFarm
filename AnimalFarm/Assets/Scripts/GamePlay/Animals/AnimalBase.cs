@@ -8,7 +8,8 @@ public enum State
 {
     Idle,
     Moving,
-    OnStartPosition
+    OnStartPosition,
+    Collecting
 }
 
 [RequireComponent(typeof(NavMeshAgent))]

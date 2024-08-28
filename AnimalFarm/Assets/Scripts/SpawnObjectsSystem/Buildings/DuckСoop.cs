@@ -43,7 +43,6 @@ public class DuckСoop : SpawnObjectsBase, IDestroyer
     {
         if (_gooses.Count != 0)
         {
-            Debug.Log(_manureTimeSpawn);
             _timer += Time.deltaTime;
             if (_timer >= _manureTimeSpawn)
             {
@@ -88,12 +87,25 @@ public class DuckСoop : SpawnObjectsBase, IDestroyer
     {
         if (_gardenBeds.Length != 0)
         {
+            List<GardenbedScript> matureGardenBeds = new List<GardenbedScript>();
             for (int i = 0; i < _gooses.Count; i++)
             {
-                _gooses[i].Target = _gardenBeds[UnityEngine.Random.Range(0, _gardenBeds.Length)].transform;
-                _gooses[i].Market = _market.transform;
-                _gooses[i].StartPosition = gameObject.transform;
-                _gooses[i].CollectPlants();
+                for(int j = 0;  j < _gardenBeds.Length; j++)
+                {
+                    if (!_gardenBeds[j].GetIsMaturing())
+                    {
+                        matureGardenBeds.Add(_gardenBeds[j]);
+                        if (matureGardenBeds.Count != 0)
+                        {
+                            GardenbedScript tempGardenBed = matureGardenBeds[Random.Range(0, matureGardenBeds.Count)];
+                            _gooses[i].Target = tempGardenBed.transform;
+                            _gooses[i].Market = _market.transform;
+                            _gooses[i].StartPosition = gameObject.transform;
+                            _gooses[i].GardenBed = tempGardenBed;
+                            _gooses[i].CollectPlants();
+                        }
+                    }
+                }
             }
         }
     }

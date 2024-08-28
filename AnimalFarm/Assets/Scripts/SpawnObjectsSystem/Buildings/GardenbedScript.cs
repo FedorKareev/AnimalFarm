@@ -53,7 +53,7 @@ public class GardenbedScript : SpawnObjectsBase, IDestroyer
 
     private void Update()
     {
-        _multiplierAmount.text = $"{Mathf.Floor(_timeMultiplier * 100)/100}X";
+        _multiplierAmount.text = $"{Mathf.Floor(_timeMultiplier * 100) / 100}X";
     }
 
     private void OnMouseDown()
@@ -134,6 +134,19 @@ public class GardenbedScript : SpawnObjectsBase, IDestroyer
         _timeMultiplierByUpgrade += multiplier;
         _timeMultiplier = _timeMultiplierByUpgrade;
     }
+
+    public bool GetIsMaturing()
+    {
+        if (_plantedObject != null)
+        {
+            return _plantedObject.GetComponent<Plant>()._isMaturing;
+        }
+        else
+        {
+            return true;
+        }
+    }
+
     public void DestroyBuilding()
     {
         itemData.Amount++;
