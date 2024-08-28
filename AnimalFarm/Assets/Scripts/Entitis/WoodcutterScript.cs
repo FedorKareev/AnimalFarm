@@ -8,8 +8,20 @@ public class WoodcutterScript : MonoBehaviour
     private float timeBeforeDestroy;
     [SerializeField]
     private ToolSystem ToolSystem;
+
+    [Header("Audio Clips")]
+    [SerializeField]
+    private AudioClip[] _chopTreeSounds;
+
     private bool isCuttingTree = false;
     private TreeHealth _treeHealth;
+    private AudioSource _audioSource;
+
+
+    private void Start()
+    {
+        _audioSource = GetComponent<AudioSource>();
+    }
 
     private void Update()
     {
@@ -27,6 +39,7 @@ public class WoodcutterScript : MonoBehaviour
     public void HitTheTree()
     {
         _treeHealth.TakeDamage(Random.Range(5, 10));
+        _audioSource.PlayOneShot(_chopTreeSounds[Random.Range(0,_chopTreeSounds.Length)]);
     }
 
     public bool IsCuttingTree()

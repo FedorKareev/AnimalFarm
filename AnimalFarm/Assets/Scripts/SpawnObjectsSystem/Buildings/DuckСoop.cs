@@ -97,6 +97,7 @@ public class DuckСoop : SpawnObjectsBase, IDestroyer
             }
         }
     }
+
     public void DestroyBuilding()
     {
         itemData.Amount++;

@@ -10,6 +10,7 @@ public class BuildingSystem : SpawnObjectsBase
     private Vector3 pos;
     private RaycastHit hit;
     private GameObject pendingObject;
+    private AudioSource _audioSource;
 
     [SerializeField]
     private float gridSize;
@@ -20,11 +21,16 @@ public class BuildingSystem : SpawnObjectsBase
     [SerializeField]
     private int rotateDigrees;
 
+    [Header("Audio Clips")]
+    [SerializeField]
+    private AudioClip _setBuildingSound;
+
     public bool CanPlace { get; set; }
 
     private void Awake()
     {
         Instance = this;
+        _audioSource = GetComponent<AudioSource>();
     }
     private void Start()
     {
@@ -89,8 +95,8 @@ public class BuildingSystem : SpawnObjectsBase
             }
             if (Input.GetMouseButton(0) && CanPlace)
             {
-                Debug.Log("Это метод спавна");
                 PlaceObject();
+                _audioSource.PlayOneShot(_setBuildingSound);
             }
         }
     }

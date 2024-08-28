@@ -11,8 +11,8 @@ GameObject:
   - component: {fileID: 2653872440861927780}
   - component: {fileID: 8781891055341552711}
   - component: {fileID: 4403006131882667472}
-  - component: {fileID: 26679889795682606}
   - component: {fileID: 2678831353452327261}
+  - component: {fileID: 26679889795682606}
   - component: {fileID: 7585358665086730098}
   m_Layer: 3
   m_Name: Goose
@@ -82,6 +82,18 @@ CapsuleCollider:
   m_Height: 1.88
   m_Direction: 1
   m_Center: {x: -0.2, y: 0.57, z: 0}
+--- !u!114 &2678831353452327261
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5282443742050028155}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 07ffcb9ec76517d429bf1dc487fae215, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!54 &26679889795682606
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -109,18 +121,6 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
---- !u!114 &2678831353452327261
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5282443742050028155}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 07ffcb9ec76517d429bf1dc487fae215, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!114 &7585358665086730098
 MonoBehaviour:
   m_ObjectHideFlags: 0

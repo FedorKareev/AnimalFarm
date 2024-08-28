@@ -18,14 +18,22 @@ public class GardenbedScript : SpawnObjectsBase, IDestroyer
     private GameObject vegetableSelectionMenu;
     [SerializeField]
     private TextMeshPro _multiplierAmount;
-
     [field: SerializeField]
     public ItemData itemData { get; set; }
+
+    [Header("Audio Clips")]
+    [SerializeField]
+    private AudioClip _plantSound;
+    [SerializeField]
+    private AudioClip _collectSound;
+    [SerializeField]
+    private AudioClip _digPlantSound;
 
     private bool isAbleToOpen;
     private GameObject _plantedObject;
     private Plant rightPlant;
     private float _timeMultiplierByUpgrade = 1;
+    private AudioSource _audioSource;
 
 
     public float TimeMultipleir
@@ -40,6 +48,7 @@ public class GardenbedScript : SpawnObjectsBase, IDestroyer
     {
         SetHoles();
         onSpawn?.Invoke();
+        _audioSource = GetComponent<AudioSource>();
     }
 
     private void Update()
@@ -70,6 +79,7 @@ public class GardenbedScript : SpawnObjectsBase, IDestroyer
                 _plantedObject = Instantiate(objectsToSpawn[Index], spawnPoints[i].position, Quaternion.identity, spawnPoints[i]);
                 _plantedObject.GetComponent<Plant>().TakeMultiplier(_timeMultiplier);
                 IsSpawned = true;
+                _audioSource.PlayOneShot(_plantSound);
             }
         }
     }
@@ -92,6 +102,7 @@ public class GardenbedScript : SpawnObjectsBase, IDestroyer
                 Destroy(spawnPoints[i].GetChild(0).gameObject);
             }
             SetHoles();
+            _audioSource.PlayOneShot(_digPlantSound);
         }
     }
     public void CollectPlants()
@@ -106,6 +117,7 @@ public class GardenbedScript : SpawnObjectsBase, IDestroyer
             _plantedObject.GetComponent<Plant>().ItemData.Amount++;
             _timeMultiplier = _timeMultiplierByUpgrade;
             DigVegetable();
+            _audioSource.PlayOneShot(_collectSound);
         }
         else
         {

@@ -13,12 +13,30 @@ public class Market : MonoBehaviour
     [SerializeField]
     private Money _money;
 
+    [Header("Audio Clips")]
+    [SerializeField]
+    private AudioClip _sallSound;
+
+    private AudioSource _audioSource;
+    private void Start()
+    {
+        _audioSource = GetComponent<AudioSource>();
+    }
+
     private void OnTriggerEnter(Collider other)
     {
         Saller saller = other.GetComponent<Saller>();
         if (saller != null)
         {
             _marketUI.SetActive(true);
+        }
+    }
+    private void OnTriggerExit(Collider other)
+    {
+        Saller saller = other.GetComponent<Saller>();
+        if (saller != null)
+        {
+            _marketUI.SetActive(false);
         }
     }
 
@@ -28,6 +46,7 @@ public class Market : MonoBehaviour
         {
             _money._amount += itemData.PriceForSell;
             itemData.Amount--;
+            _audioSource.PlayOneShot(_sallSound);
         }
     }
 }

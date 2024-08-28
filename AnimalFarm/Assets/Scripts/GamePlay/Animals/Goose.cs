@@ -30,6 +30,6 @@ public class Goose : AnimalBase
     {
         _isCollecting = true;
         _agent.enabled = true;
-        AnimalMove(_target, () => StartCoroutine(Timer(() => AnimalMove(_market, () => StartCoroutine(Timer(() => AnimalMove(startPosition, () => OnStartPosition())))))));
+        AnimalMove(_target, () => StartCoroutine(Timer(() => StartCoroutine(Timer(() => AnimalMove(startPosition, () => OnStartPosition()))))));
     }
 }
