@@ -104,7 +104,7 @@ public class AnimalBase : MonoBehaviour
     protected IEnumerator Timer(Action OnTimerEnd)
     {
         state = State.Idle;
-        yield return new WaitForSeconds(timer);
+        yield return new WaitForSeconds(5);
         OnTimerEnd?.Invoke();
     }
 }
