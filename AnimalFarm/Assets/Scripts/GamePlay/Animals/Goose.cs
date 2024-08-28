@@ -33,14 +33,14 @@ public class Goose : AnimalBase
         }
     }
 
-    private void OnTriggerEnter(Collider collider)
-    {
-        GardenbedScript gardenBed = collider.gameObject.GetComponent<GardenbedScript>();
-        if (gardenBed != null && gardenBed.IsSpawned && _isCollecting)
-        {
-            gardenBed.CollectPlants();
-        }
-    }
+    //private void OnTriggerEnter(Collider collider)
+    //{
+    //    GardenbedScript gardenBed = collider.gameObject.GetComponent<GardenbedScript>();
+    //    if (gardenBed != null && gardenBed.IsSpawned && _isCollecting)
+    //    {
+    //        gardenBed.CollectPlants();
+    //    }
+    //}
 
     protected void CollectPlants(Action onCollectPlants)
     {
