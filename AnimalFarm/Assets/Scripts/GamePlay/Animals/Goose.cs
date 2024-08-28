@@ -5,8 +5,6 @@ using UnityEngine;
 
 public class Goose : AnimalBase
 {
-    private bool _isCollecting;
-
     private GardenbedScript _gardenBed;
 
     public GardenbedScript GardenBed
@@ -33,15 +31,6 @@ public class Goose : AnimalBase
         }
     }
 
-    //private void OnTriggerEnter(Collider collider)
-    //{
-    //    GardenbedScript gardenBed = collider.gameObject.GetComponent<GardenbedScript>();
-    //    if (gardenBed != null && gardenBed.IsSpawned && _isCollecting)
-    //    {
-    //        gardenBed.CollectPlants();
-    //    }
-    //}
-
     protected void CollectPlants(Action onCollectPlants)
     {
         _gardenBed.CollectPlants();
@@ -50,7 +39,6 @@ public class Goose : AnimalBase
 
     public void CollectPlants()
     {
-        _isCollecting = true;
         _agent.enabled = true;
         AnimalMove(_target, () => CollectPlants(() => StartCoroutine(Timer(() => AnimalMove(startPosition, () => OnStartPosition())))));
     }
