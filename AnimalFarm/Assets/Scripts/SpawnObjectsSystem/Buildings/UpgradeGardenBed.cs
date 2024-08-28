@@ -9,7 +9,7 @@ public class UpgradeGardenBed : MonoBehaviour
     private Text woodForUpdateText;
 
     private GardenbedScript gardenBed;
-    private float woodsForUpgrade = 30;
+    private float woodsForUpgrade = 15;
 
     private void Update()
     {
@@ -23,12 +23,12 @@ public class UpgradeGardenBed : MonoBehaviour
 
     public void LevelUpGaredenBed()
     {
-        if (TreeCounter._amount >= woodsForUpgrade)
+        if (TreeCounter.woodData.Amount >= woodsForUpgrade)
         {
             gardenBed.ChangeMultiplierByUpgrade(0.15f);
-            TreeCounter._amount -= (int)woodsForUpgrade;
-            woodsForUpgrade *= 1.3f;
-            Mathf.Round(woodsForUpgrade);
+            TreeCounter.woodData.Amount -= (int)woodsForUpgrade;
+            woodsForUpgrade *= 1.1f;
+            woodsForUpgrade = Mathf.Round(woodsForUpgrade);
         }
     }
 }

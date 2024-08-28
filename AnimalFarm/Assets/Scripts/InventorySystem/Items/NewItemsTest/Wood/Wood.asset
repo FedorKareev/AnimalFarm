@@ -10,10 +10,10 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: c504607afbbf1974a923a6c1153155e5, type: 3}
-  m_Name: Tomato
+  m_Name: Wood
   m_EditorClassIdentifier: 
-  icon: {fileID: 21300000, guid: d6f61937247ad7b46aca3e145381ef00, type: 3}
-  discription: "\u042F\u0449\u0438\u043A \u043F\u043E\u043C\u0438\u0434\u043E\u0440\u043E\u0432"
+  icon: {fileID: 21300000, guid: 96a1e7a8d1abc704ba8c506e8b617a8b, type: 3}
+  discription: 
   amount: 0
   priceForBuy: 0
-  priceForSell: 30
+  priceForSell: 1
