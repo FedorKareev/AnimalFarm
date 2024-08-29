@@ -28,6 +28,8 @@ public class GardenbedScript : SpawnObjectsBase, IDestroyer
     private AudioClip _collectSound;
     [SerializeField]
     private AudioClip _digPlantSound;
+    [SerializeField]
+    private AudioClip _upgradeSound;
 
     private bool isAbleToOpen;
     private GameObject _plantedObject;
@@ -131,6 +133,7 @@ public class GardenbedScript : SpawnObjectsBase, IDestroyer
     }
     public void ChangeMultiplierByUpgrade(float multiplier)
     {
+        _audioSource.PlayOneShot(_upgradeSound);
         _timeMultiplierByUpgrade += multiplier;
         _timeMultiplier = _timeMultiplierByUpgrade;
     }
