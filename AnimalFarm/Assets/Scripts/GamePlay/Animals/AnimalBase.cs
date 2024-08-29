@@ -26,6 +26,15 @@ public class AnimalBase : MonoBehaviour
     [SerializeField]
     protected ItemData _animal;
 
+    public State State
+    {
+        get 
+        { 
+            return state; 
+        }
+    }
+
+
     public Transform StartPosition
     {
         get
@@ -76,6 +85,7 @@ public class AnimalBase : MonoBehaviour
     {
         _agent = GetComponent<NavMeshAgent>();
         timer = GardenbedScript.TIMEFOR_COLLECT;
+        state = State.OnStartPosition;
     }
 
     protected void HandleMove()
@@ -98,7 +108,7 @@ public class AnimalBase : MonoBehaviour
 
     protected void OnStartPosition()
     {
-        _agent.ResetPath();
+        Debug.Log("Я на стартовой позиции");
         state = State.OnStartPosition;
     }
 

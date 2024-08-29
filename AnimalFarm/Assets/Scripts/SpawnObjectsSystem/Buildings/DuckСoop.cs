@@ -51,6 +51,14 @@ public class DuckСoop : SpawnObjectsBase, IDestroyer
             }
         }
         _ammountOfGoosesText.text = $"{_gooses.Count.ToString()}/4";
+
+        for (int i = 0; i < _gooses.Count; i++) 
+        {
+            if (_gooses[i].State == State.OnStartPosition)
+            {
+                MoveAnimals();
+            }
+        }
     }
 
     private void OnEnable()
@@ -90,7 +98,7 @@ public class DuckСoop : SpawnObjectsBase, IDestroyer
             List<GardenbedScript> matureGardenBeds = new List<GardenbedScript>();
             for (int i = 0; i < _gooses.Count; i++)
             {
-                for(int j = 0;  j < _gardenBeds.Length; j++)
+                for (int j = 0; j < _gardenBeds.Length; j++)
                 {
                     if (!_gardenBeds[j].GetIsMaturing())
                     {

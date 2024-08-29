@@ -30,6 +30,7 @@ public class EscapeMenu : MonoBehaviour
     }
     public void ExitToMainMenuButton()
     {
+        OffPanel();
         SceneManager.LoadScene(0);
     }
     private void OnPanel()
