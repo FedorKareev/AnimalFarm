@@ -18,6 +18,8 @@ public class GardenbedScript : SpawnObjectsBase, IDestroyer
     private GameObject vegetableSelectionMenu;
     [SerializeField]
     private TextMeshPro _multiplierAmount;
+    [SerializeField]
+    private LayerMask _playerLayer;
     [field: SerializeField]
     public ItemData itemData { get; set; }
 
@@ -36,7 +38,7 @@ public class GardenbedScript : SpawnObjectsBase, IDestroyer
     private Plant rightPlant;
     private float _timeMultiplierByUpgrade = 1;
     private AudioSource _audioSource;
-
+    private bool _isPlayerHere;
 
     public float TimeMultipleir
     {
@@ -56,11 +58,24 @@ public class GardenbedScript : SpawnObjectsBase, IDestroyer
     private void Update()
     {
         _multiplierAmount.text = $"{Mathf.Floor(_timeMultiplier * 100) / 100}X";
+        CheckIsPlayerHere();
+        if (_isPlayerHere)
+        {
+            isAbleToOpen = true;
+        }
+        else
+        {
+            isAbleToOpen = false;
+            vegetableSelectionMenu.SetActive(false);
+        }
     }
 
     private void OnMouseDown()
     {
-        vegetableSelectionMenu.SetActive(true);
+        if (isAbleToOpen)
+        {
+            vegetableSelectionMenu.SetActive(true);
+        }
     }
 
     public override void SelectObject(int Index)
@@ -109,12 +124,7 @@ public class GardenbedScript : SpawnObjectsBase, IDestroyer
     }
     public void CollectPlants()
     {
-        StartCoroutine(CollectPlantsEnumerator());
-    }
-    private IEnumerator CollectPlantsEnumerator()
-    {
-        yield return new WaitForSeconds(TIMEFOR_COLLECT);
-        if (_plantedObject != null && !_plantedObject.GetComponent<Plant>()._isMaturing)
+        if (_plantedObject != null)
         {
             _plantedObject.GetComponent<Plant>().ItemData.Amount++;
             _timeMultiplier = _timeMultiplierByUpgrade;
@@ -148,6 +158,12 @@ public class GardenbedScript : SpawnObjectsBase, IDestroyer
         {
             return true;
         }
+    }
+
+    private void CheckIsPlayerHere()
+    {
+        Collider[] colliders = Physics.OverlapBox(transform.position, new Vector3(6,14,8),Quaternion.identity, _playerLayer);
+        _isPlayerHere = colliders.Length > 0;
     }
 
     public void DestroyBuilding()

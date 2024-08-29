@@ -53,6 +53,8 @@ AudioMixerController:
     name: Master
   - guid: aaf8a0b50229e344fbd0695bbfc75598
     name: Music
+  - guid: 666ebe898ae6cfb438f530ed476683dd
+    name: SFX
   m_AudioMixerGroupViews:
   - guids:
     - 526c66e1bc1de604f9c96be428e91c54

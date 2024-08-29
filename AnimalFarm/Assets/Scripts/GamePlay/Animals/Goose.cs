@@ -40,6 +40,6 @@ public class Goose : AnimalBase
     public void CollectPlants()
     {
         _agent.enabled = true;
-        AnimalMove(_target, () => CollectPlants(() => StartCoroutine(Timer(() => AnimalMove(startPosition, () => OnStartPosition())))));
+        AnimalMove(_target, () => StartCoroutine(Timer(() => CollectPlants(() => AnimalMove(startPosition, () => OnStartPosition())))));
     }
 }

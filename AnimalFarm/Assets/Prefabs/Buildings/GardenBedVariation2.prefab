@@ -4012,6 +4012,9 @@ MonoBehaviour:
   _timeMultiplier: 1
   vegetableSelectionMenu: {fileID: 6994295830734651739}
   _multiplierAmount: {fileID: 8398344833663571599}
+  _playerLayer:
+    serializedVersion: 2
+    m_Bits: 1024
   <itemData>k__BackingField: {fileID: 11400000, guid: 89bfb0ecaa39ad54b8adeee72a933e44, type: 2}
   _plantSound: {fileID: 8300000, guid: 7df347a806d08b94795387e655d531b0, type: 3}
   _collectSound: {fileID: 8300000, guid: 1b4f3c176af80d5498ece9fc6a072361, type: 3}
