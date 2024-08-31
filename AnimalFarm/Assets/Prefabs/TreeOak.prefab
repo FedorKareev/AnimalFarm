@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 1687426368980408071}
   - component: {fileID: 5002027190738074474}
   - component: {fileID: 4897110317337207737}
-  - component: {fileID: 7082222555056658056}
+  - component: {fileID: 2062450193268723560}
   m_Layer: 8
   m_Name: TreeOak
   m_TagString: Untagged
@@ -121,7 +121,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a26a1aea4c3d7544b97cda086fba540c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!95 &7082222555056658056
+--- !u!95 &2062450193268723560
 Animator:
   serializedVersion: 5
   m_ObjectHideFlags: 0
@@ -131,7 +131,7 @@ Animator:
   m_GameObject: {fileID: 7500105464108549530}
   m_Enabled: 1
   m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 9100000, guid: defdc3e8b907d554db1de157157aa881, type: 2}
+  m_Controller: {fileID: 9100000, guid: 99c7234bb2bd26340a9e8fd091cc9318, type: 2}
   m_CullingMode: 0
   m_UpdateMode: 0
   m_ApplyRootMotion: 0

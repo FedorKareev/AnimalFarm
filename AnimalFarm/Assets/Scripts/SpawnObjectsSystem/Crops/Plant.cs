@@ -12,7 +12,12 @@ public class Plant : MonoBehaviour
     private Mesh[] cropsStateMeshes;
     [SerializeField]
     private ItemData _itemData;
+    [SerializeField]
+    private ParticleSystem _spawnParticle;
     public bool _isMaturing { get; private set; } = true;
+
+    private int _cropState = 0;
+    private float elapsedTime;
     public ItemData ItemData
     {
         get
@@ -25,8 +30,10 @@ public class Plant : MonoBehaviour
         }
     }
 
-    private int _cropState = 0;
-    private float elapsedTime;
+    private void Start()
+    {
+        _spawnParticle.Play();
+    }
 
     private void Update()
     {

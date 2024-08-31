@@ -7,15 +7,27 @@ public class ITEM_TEST : MonoBehaviour
 {
     [SerializeField]
     private int amount;
-    // ВНИМАНИЕ это поле это просто тест, потом удалишь
     [SerializeField]
     private ItemData itemTest;
+
+    private AudioSource _audioSource;
+
+    [Header("Audio")]
+    [SerializeField]
+    private AudioClip _pickUpAudio;
+
+    private void Start()
+    {
+        _audioSource = GetComponent<AudioSource>();
+    }
+
     private void OnTriggerEnter(Collider other)
     {
         
         Saller player = other.GetComponent<Saller>();
         if (player != null)
         {
+            _audioSource.PlayOneShot(_pickUpAudio);
             itemTest.Amount += amount;
             Destroy(gameObject);
         }

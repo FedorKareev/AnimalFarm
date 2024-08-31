@@ -48,6 +48,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   amount: 1
   itemTest: {fileID: 11400000, guid: e4f01e99e32bdb44ab0a16ed67282ab4, type: 2}
+  _pickUpAudio: {fileID: 8300000, guid: 4e0a2f7ee6e99fe41a34caf9b6909036, type: 3}
 --- !u!136 &6179382638282835062
 CapsuleCollider:
   m_ObjectHideFlags: 0
