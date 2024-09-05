@@ -18,15 +18,27 @@ public class GardenbedScript : SpawnObjectsBase, IDestroyer
     private GameObject vegetableSelectionMenu;
     [SerializeField]
     private TextMeshPro _multiplierAmount;
-
+    [SerializeField]
+    private LayerMask _playerLayer;
     [field: SerializeField]
     public ItemData itemData { get; set; }
+
+    [Header("Audio Clips")]
+    [SerializeField]
+    private AudioClip _plantSound;
+    [SerializeField]
+    private AudioClip _collectSound;
+    [SerializeField]
+    private AudioClip _digPlantSound;
+    [SerializeField]
+    private AudioClip _upgradeSound;
 
     private bool isAbleToOpen;
     private GameObject _plantedObject;
     private Plant rightPlant;
     private float _timeMultiplierByUpgrade = 1;
-
+    private AudioSource _audioSource;
+    private bool _isPlayerHere;
 
     public float TimeMultipleir
     {
@@ -40,16 +52,30 @@ public class GardenbedScript : SpawnObjectsBase, IDestroyer
     {
         SetHoles();
         onSpawn?.Invoke();
+        _audioSource = GetComponent<AudioSource>();
     }
 
     private void Update()
     {
-        _multiplierAmount.text = $"{Mathf.Floor(_timeMultiplier * 100)/100}X";
+        _multiplierAmount.text = $"{Mathf.Floor(_timeMultiplier * 100) / 100}X";
+        CheckIsPlayerHere();
+        if (_isPlayerHere)
+        {
+            isAbleToOpen = true;
+        }
+        else
+        {
+            isAbleToOpen = false;
+            vegetableSelectionMenu.SetActive(false);
+        }
     }
 
     private void OnMouseDown()
     {
-        vegetableSelectionMenu.SetActive(true);
+        if (isAbleToOpen)
+        {
+            vegetableSelectionMenu.SetActive(true);
+        }
     }
 
     public override void SelectObject(int Index)
@@ -70,6 +96,7 @@ public class GardenbedScript : SpawnObjectsBase, IDestroyer
                 _plantedObject = Instantiate(objectsToSpawn[Index], spawnPoints[i].position, Quaternion.identity, spawnPoints[i]);
                 _plantedObject.GetComponent<Plant>().TakeMultiplier(_timeMultiplier);
                 IsSpawned = true;
+                _audioSource.PlayOneShot(_plantSound);
             }
         }
     }
@@ -92,20 +119,17 @@ public class GardenbedScript : SpawnObjectsBase, IDestroyer
                 Destroy(spawnPoints[i].GetChild(0).gameObject);
             }
             SetHoles();
+            _audioSource.PlayOneShot(_digPlantSound);
         }
     }
     public void CollectPlants()
     {
-        StartCoroutine(CollectPlantsEnumerator());
-    }
-    private IEnumerator CollectPlantsEnumerator()
-    {
-        yield return new WaitForSeconds(TIMEFOR_COLLECT);
-        if (_plantedObject != null && !_plantedObject.GetComponent<Plant>()._isMaturing)
+        if (_plantedObject != null)
         {
             _plantedObject.GetComponent<Plant>().ItemData.Amount++;
             _timeMultiplier = _timeMultiplierByUpgrade;
             DigVegetable();
+            _audioSource.PlayOneShot(_collectSound);
         }
         else
         {
@@ -119,9 +143,29 @@ public class GardenbedScript : SpawnObjectsBase, IDestroyer
     }
     public void ChangeMultiplierByUpgrade(float multiplier)
     {
+        _audioSource.PlayOneShot(_upgradeSound);
         _timeMultiplierByUpgrade += multiplier;
         _timeMultiplier = _timeMultiplierByUpgrade;
     }
+
+    public bool GetIsMaturing()
+    {
+        if (_plantedObject != null)
+        {
+            return _plantedObject.GetComponent<Plant>()._isMaturing;
+        }
+        else
+        {
+            return true;
+        }
+    }
+
+    private void CheckIsPlayerHere()
+    {
+        Collider[] colliders = Physics.OverlapBox(transform.position, new Vector3(6,14,8),Quaternion.identity, _playerLayer);
+        _isPlayerHere = colliders.Length > 0;
+    }
+
     public void DestroyBuilding()
     {
         itemData.Amount++;

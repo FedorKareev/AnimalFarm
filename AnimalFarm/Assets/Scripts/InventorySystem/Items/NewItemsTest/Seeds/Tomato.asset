@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   icon: {fileID: 21300000, guid: 2ebbac955397ce94ab0556e232e87143, type: 3}
   discription: "\u0421\u0435\u043C\u0435\u043D\u0430 \u043F\u043E\u043C\u0438\u0434\u043E\u0440\u0430\n\u0412\u0440\u0435\u043C\u044F
-    \u0441\u043E\u0437\u0440\u0435\u0432\u0430\u043D\u0438\u044F: 2\u043C"
+    \u0441\u043E\u0437\u0440\u0435\u0432\u0430\u043D\u0438\u044F: 1\u043C"
   amount: 0
   priceForBuy: 20
   priceForSell: 0

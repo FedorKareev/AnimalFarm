@@ -7,6 +7,8 @@ public class UpgradeGardenBed : MonoBehaviour
 {
     [SerializeField]
     private Text woodForUpdateText;
+    [SerializeField]
+    private ParticleSystem _upgradeParticle;
 
     private GardenbedScript gardenBed;
     private float woodsForUpgrade = 15;
@@ -25,6 +27,7 @@ public class UpgradeGardenBed : MonoBehaviour
     {
         if (TreeCounter.woodData.Amount >= woodsForUpgrade)
         {
+            _upgradeParticle.Play();
             gardenBed.ChangeMultiplierByUpgrade(0.15f);
             TreeCounter.woodData.Amount -= (int)woodsForUpgrade;
             woodsForUpgrade *= 1.1f;

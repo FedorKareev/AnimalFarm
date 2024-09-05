@@ -2,9 +2,12 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine.UI;
 using UnityEngine;
+using System;
 
 public class LaptopButton : InventoryButton
 {
+    public static Action OnBuySound;
+
     [SerializeField]
     private Text _costCount;
     [SerializeField]
@@ -26,6 +29,7 @@ public class LaptopButton : InventoryButton
         {
             _moneyScript._amount -= inventoryData.PriceForBuy;
             _randomSpawn.SpawnInRadius(goods);
+            OnBuySound?.Invoke();
         }
         else
         {

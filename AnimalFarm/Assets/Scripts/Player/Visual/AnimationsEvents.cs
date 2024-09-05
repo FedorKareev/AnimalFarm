@@ -9,4 +9,10 @@ public class AnimationsEvents : MonoBehaviour
         WoodcutterScript woodCutter = GetComponentInParent<WoodcutterScript>();
         woodCutter.HitTheTree();
     }
+
+    public void FootStepActivator()
+    {
+        FootSteps footSteps = GetComponentInParent<FootSteps>();
+        footSteps.FootStepsOn();
+    }
 }

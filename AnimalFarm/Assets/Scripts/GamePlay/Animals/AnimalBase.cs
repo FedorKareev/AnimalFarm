@@ -8,7 +8,8 @@ public enum State
 {
     Idle,
     Moving,
-    OnStartPosition
+    OnStartPosition,
+    Collecting
 }
 
 [RequireComponent(typeof(NavMeshAgent))]
@@ -24,6 +25,15 @@ public class AnimalBase : MonoBehaviour
     protected Action _onTargetPos;
     [SerializeField]
     protected ItemData _animal;
+
+    public State State
+    {
+        get 
+        { 
+            return state; 
+        }
+    }
+
 
     public Transform StartPosition
     {
@@ -75,6 +85,7 @@ public class AnimalBase : MonoBehaviour
     {
         _agent = GetComponent<NavMeshAgent>();
         timer = GardenbedScript.TIMEFOR_COLLECT;
+        state = State.OnStartPosition;
     }
 
     protected void HandleMove()
@@ -97,14 +108,14 @@ public class AnimalBase : MonoBehaviour
 
     protected void OnStartPosition()
     {
-        _agent.ResetPath();
+        Debug.Log("Я на стартовой позиции");
         state = State.OnStartPosition;
     }
 
     protected IEnumerator Timer(Action OnTimerEnd)
     {
         state = State.Idle;
-        yield return new WaitForSeconds(timer);
+        yield return new WaitForSeconds(3);
         OnTimerEnd?.Invoke();
     }
 }
